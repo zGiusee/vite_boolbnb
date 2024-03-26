@@ -39,7 +39,7 @@ export default {
 .my-jumbotron {
     width: 100%;
     height: 300px;
-    background: linear-gradient(to bottom, #4ec0ff, white);
+    background: linear-gradient(to bottom, $my_lightblue, white);
     position: relative;
 
     .home-title {
