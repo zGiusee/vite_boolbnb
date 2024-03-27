@@ -32,15 +32,14 @@ export default {
                 params: {
                     page: page_number
                 }
+            }).then((response) => {
+
+                this.apartments = response.data.results.data;
+                console.log(response.data.results.data);
+
+                this.currentPage = response.data.results.current_page;
+                this.lastPage = response.data.results.last_page;
             })
-                .then((response) => {
-
-                    this.apartments = response.data.results.data;
-                    console.log(response.data.results.data);
-
-                    this.currentPage = response.data.results.current_page;
-                    this.lastPage = response.data.results.last_page;
-                })
         }
     },
 }
