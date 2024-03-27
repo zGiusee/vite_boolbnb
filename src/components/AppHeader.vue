@@ -52,8 +52,12 @@ export default {
 
                 <!-- BOTTONI (COMPUTER) -->
                 <div class="d-none col-lg-4 d-lg-flex align-items-center justify-content-lg-end">
-                    <button class="light-button me-3">Login</button>
-                    <button class="dark-button">Create an account</button>
+                    <button class="light-button me-3">
+                        <a href="http://127.0.0.1:8000/">Login</a>
+                    </button>
+                    <button class="dark-button">
+                        <a href="http://127.0.0.1:8000/register">Create an account</a>
+                    </button>
                 </div>
 
                 <!-- BOTTONI (MOBILE & TABLET) -->
@@ -88,6 +92,11 @@ export default {
     a {
         color: #fff;
         text-decoration: none;
+        transition: all 0.6s;
+
+        &:hover {
+            color: $my_bluetwo;
+        }
     }
 
     ul.menu {

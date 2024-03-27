@@ -4,6 +4,7 @@ import axios from 'axios';
 import AppHeader from '../components/AppHeader.vue';
 import AppJumbotron from '../components/AppJumbotron.vue';
 import AppFooter from '../components/AppFooter.vue';
+import ApartmentCard from '../components/ApartmentCard.vue';
 
 import { store } from '../store'
 
@@ -12,7 +13,8 @@ export default {
     components: {
         AppHeader,
         AppJumbotron,
-        AppFooter
+        AppFooter,
+        ApartmentCard
     },
     data() {
         return {
@@ -68,7 +70,15 @@ export default {
             </div>
         </div>
     </div>
-    <AppFooter />
+    <!-- CARD DA CICLARE  -->
+    <div class="container">
+        <div class="row">
+            <div class="container-card">
+                <ApartmentCard />
+
+            </div>
+        </div>
+        <AppFooter />
 
 </template>
 <style scoped lang="scss"></style>
