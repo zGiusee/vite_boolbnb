@@ -125,15 +125,19 @@ export default {
 
     .icons {
         .single-icon {
-            color: black;
+            color: white;
             font-size: 20px;
-            background-color: white;
             padding: 8px 12px;
+            border: 1px solid white;
             border-radius: 100%;
             margin-right: 10px;
             line-height: 50px;
+            transition: all 0.6s;
 
             &:hover {
+                cursor: pointer;
+                border: 1px solid $my_bluetwo;
+                background-color: white;
                 color: $my_bluetwo;
             }
         }

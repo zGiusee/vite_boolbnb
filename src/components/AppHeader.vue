@@ -14,7 +14,6 @@ export default {
 
         return { dropdownButton };
     },
-
     data() {
         return {
             navLinks: [

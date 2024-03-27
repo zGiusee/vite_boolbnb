@@ -3,11 +3,13 @@ import { store } from '../store.js';
 import axios from 'axios';
 import AppHeader from '../components/AppHeader.vue';
 import AppJumbotron from '../components/AppJumbotron.vue';
+import AppFooter from '../components/AppFooter.vue';
 
 export default {
     components: {
         AppHeader,
-        AppJumbotron
+        AppJumbotron,
+        AppFooter
     },
     data() {
         return {
@@ -38,5 +40,6 @@ export default {
             {{ apartment.address }}
         </div>
     </div>
+    <AppFooter />
 </template>
 <style scoped lang="scss"></style>
