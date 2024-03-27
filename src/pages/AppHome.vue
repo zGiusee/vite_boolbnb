@@ -7,17 +7,22 @@ import AppFooter from '../components/AppFooter.vue';
 export default {
     components: {
         AppHeader,
-        AppJumbotron,
-        AppFooter
-    }
+        AppJumbotron
+    },
+    data() {
+        return {
+            query: ' ',
+        }
+    },
 }
 </script>
 <template>
     <AppHeader />
     <AppJumbotron />
     <div>
-        <h1>ciao</h1>
+        <input type="text" v-model="query" name="query" id="query">
+        <router-link class="btn btn-primary" :to="{ name: 'search', params: { query: query } }">Cerca</router-link>
     </div>
-    <AppFooter />
+
 </template>
 <style scoped lang="scss"></style>
