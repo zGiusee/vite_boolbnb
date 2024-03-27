@@ -20,6 +20,18 @@
     border-radius: 20px;
     padding: 7px 20px;
     background-color: $my_lightblue;
+    transition: all 0.6s;
+
+
+    &:hover {
+        border: 1px solid $my_blue;
+        background-color: white;
+        color: $my_blue;
+
+        a {
+            color: $my_blue;
+        }
+    }
 }
 
 .dark-button {
@@ -29,6 +41,16 @@
     border-radius: 20px;
     padding: 7px 20px;
     background-color: $my_blue;
+    transition: all 0.6s;
+
+    &:hover {
+        background-color: white;
+        color: $my_blue;
+
+        a {
+            color: $my_blue;
+        }
+    }
 }
 
 .footer-button {
@@ -38,4 +60,15 @@
     border-radius: 20px;
     padding: 10px 25px;
     background-color: $my_bluetwo;
+    transition: all 0.6s;
+
+
+    &:hover {
+        background-color: white;
+        color: $my_blue;
+
+        a {
+            color: $my_blue;
+        }
+    }
 }
