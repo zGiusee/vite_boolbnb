@@ -60,11 +60,11 @@ export default {
     <div class="col-12">
         <div class="page_button_container">
             <div>
-                <button :class="currentPage == 1 ? 'disabled' : ''" @click=" getProjects(currentPage - 1)"
+                <button :class="currentPage == 1 ? 'disabled' : ''" @click=" getApartment(currentPage - 1)"
                     class="btn btn-secondary"><i class="bi bi-chevron-left"></i></button>
             </div>
             <div>
-                <button :class="currentPage == lastPage ? 'disabled' : ''" @click="getProjects(currentPage + 1)"
+                <button :class="currentPage == lastPage ? 'disabled' : ''" @click="getApartment(currentPage + 1)"
                     class="btn btn-secondary"><i class="bi bi-chevron-right"></i></button>
             </div>
         </div>
