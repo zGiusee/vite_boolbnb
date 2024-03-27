@@ -37,8 +37,6 @@ export default {
             }).then((response) => {
 
                 this.apartments = response.data.results.data;
-                console.log(response.data.results.data);
-
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             })
@@ -49,36 +47,26 @@ export default {
 <template>
     <AppHeader />
     <AppJumbotron />
-    <div>
-        <input type="text" v-model="query" name="query" id="query">
-        <router-link class="btn btn-primary" :to="{ name: 'search', params: { query: query } }">Cerca</router-link>
-    </div>
-    <div v-for="apartment in apartments">
-        <ul>
-            <li>{{ apartment.title }}</li>
-        </ul>
-    </div>
-    <div class="col-12">
-        <div class="page_button_container">
-            <div>
-                <button :class="currentPage == 1 ? 'disabled' : ''" @click=" getApartment(currentPage - 1)"
-                    class="btn btn-secondary"><i class="bi bi-chevron-left"></i></button>
-            </div>
-            <div>
-                <button :class="currentPage == lastPage ? 'disabled' : ''" @click="getApartment(currentPage + 1)"
-                    class="btn btn-secondary"><i class="bi bi-chevron-right"></i></button>
-            </div>
-        </div>
-    </div>
     <!-- CARD DA CICLARE  -->
     <div class="container">
-        <div class="row">
-            <div class="container-card">
-                <ApartmentCard />
+        <div class="row align-items-end  my-3">
+            <div class="col-6">
+                <label for="query" class="d-block mb-2">Search a destination</label>
+                <input type="text" v-model="query" class="form-control" name="query" id="query">
+            </div>
+            <div class="col-6">
+                <router-link class="btn btn-primary"
+                    :to="{ name: 'search', params: { query: query } }">Cerca</router-link>
+            </div>
+            <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
 
+                <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
             </div>
         </div>
-        <AppFooter />
+    </div>
+    <AppFooter />
 
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@use '../styles/generals.scss';
+</style>
