@@ -9,7 +9,7 @@ export default {
 
         onMounted(() => {
             // Inizializza il dropdown utilizzando l'API JavaScript di Bootstrap
-            // new Dropdown(dropdownButton.value);
+            /* new Dropdown(dropdownButton.value); */
         });
 
         return { dropdownButton };
