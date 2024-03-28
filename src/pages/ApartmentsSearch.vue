@@ -55,7 +55,7 @@ export default {
                     find the perfect avaible apartment for your trip
                 </div>
             </div>
-            <div class="col-6 d-flex">
+            <div class="col-12 col-sm-10 col-lg-6 d-flex">
                 <input type="text" v-model="query" class="form-control" name="query" id="query">
                 <button type="button" class="search-button ms-2" @click="getApartments2(query)">Search</button>
             </div>
