@@ -77,7 +77,8 @@ export default {
                 </div>
             </div>
             <div class="col-12 col-sm-10 col-lg-6 d-flex">
-                <input type="text" v-model="query" class="form-control" name="query" id="query">
+                <input type="text" v-model="query" placeholder="Es. Bologna" class="form-control" name="query"
+                    id="query">
                 <router-link class="search-button ms-2"
                     :to="{ name: 'search', params: { query: query } }">Search</router-link>
             </div>
