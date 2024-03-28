@@ -55,7 +55,7 @@ export default {
     overflow: hidden;
 
     img {
-        max-width: 100%;
+        width: 100%;
         aspect-ratio: 1 / 1;
         object-fit: cover;
         object-position: 50% 0%;
