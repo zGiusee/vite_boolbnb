@@ -28,17 +28,17 @@ export default {
 </script>
 
 <template>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3 mb-5 mc-card">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3 mb-5 p-0 mc-card">
         <div class="p-0">
             <img :src="getImage()">
         </div>
         <div class="label">
             <i class="bi bi-house-check-fill"></i> Avaible
         </div>
-        <div class="card-tit pt-3">
+        <div class="card-tit px-2 pt-3">
             {{ apartment.title }}
         </div>
-        <div class="address pb-3">
+        <div class="address px-2 pb-3">
             <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
         </div>
     </div>

@@ -83,16 +83,6 @@ export default {
             </div>
         </div>
 
-        <!-- <div class="row justify-content-center align-items-end my-3">
-            <div class="col-6">
-                <label for="query" class="d-block mb-2">Search your destination</label>
-                <input type="text" v-model="query" class="form-control" name="query" id="query">
-            </div>
-            <div class="col-6">
-                <router-link class="dark-button" :to="{ name: 'search', params: { query: query } }">Search</router-link>
-            </div>
-        </div> -->
-
         <!-- CARD CICLATE  -->
         <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
             <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
