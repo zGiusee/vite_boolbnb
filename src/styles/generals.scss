@@ -9,6 +9,11 @@
     font-family: 'Poppins';
 }
 
+// GENERALE
+a {
+    text-decoration: none;
+}
+
 // BOTTONI
 .light-button {
     font-size: 13px;
@@ -43,8 +48,10 @@
     &:hover {
         background-color: white;
         color: $my_blue;
+
         a {
             color: $my_blue;
+            text-decoration: none;
         }
     }
 }
@@ -65,6 +72,25 @@
 
         a {
             color: $my_blue;
+        }
+    }
+}
+
+.search-button {
+    font-size: 15px;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background-color: $my_blue;
+    transition: all 0.6s;
+
+    &:hover {
+        background-color: $my_lightblue;
+        color: white;
+
+        a {
+            color: white;
         }
     }
 }

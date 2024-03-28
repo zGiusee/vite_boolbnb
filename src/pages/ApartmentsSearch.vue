@@ -43,21 +43,67 @@ export default {
 <template>
     <AppHeader />
     <AppJumbotron />
-    <div class="container">
+
+    <!-- SEARCH AND CARD SECTION  -->
+    <div class="container my-5">
+
+        <!-- SEARCHBAR  -->
+        <div class="row justify-content-center text-center">
+            <div class="popular-title mb-3">
+                Search your destination
+                <div class="popular-subtitle">
+                    find the perfect avaible apartment for your trip
+                </div>
+            </div>
+            <div class="col-6 d-flex">
+                <input type="text" v-model="query" class="form-control" name="query" id="query">
+                <button type="button" class="search-button ms-2" @click="getApartments2(query)">Search</button>
+            </div>
+        </div>
+
+        <!-- <div class="row justify-content-center align-items-end my-3">
+    <div class="col-6">
+        <label for="query" class="d-block mb-2">Search your destination</label>
+        <input type="text" v-model="query" class="form-control" name="query" id="query">
+    </div>
+    <div class="col-6">
+        <router-link class="dark-button" :to="{ name: 'search', params: { query: query } }">Search</router-link>
+    </div>
+</div> -->
+
+        <!-- CARD CICLATE  -->
+        <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
+            <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
+        </div>
+    </div>
+
+
+
+    <!-- <div class="container">
         <div class="row align-items-end  my-3">
             <div class="col-6">
                 <label for="query" class="d-block mb-2">Search a destination</label>
                 <input type="text" v-model="query" class="form-control" name="query" id="query">
             </div>
-            <div class="col-6">
-                <button type="button" class="btn btn-primary mx-2" @click="getApartments2(query)">Cerca</button>
+            <div class="col-6 d-flex">
+                <button type="button" class="search-button ms-2" @click="getApartments2(query)">Search</button>
             </div>
             <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
 
                 <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
             </div>
         </div>
-    </div>
+    </div> -->
     <AppFooter />
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+@use '../styles/generals.scss' as *;
+
+.popular-title {
+    font-size: 50px;
+
+    .popular-subtitle {
+        font-size: 20px;
+    }
+}
+</style>

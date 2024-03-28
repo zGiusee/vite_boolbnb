@@ -47,26 +47,68 @@ export default {
 <template>
     <AppHeader />
     <AppJumbotron />
-    <!-- CARD DA CICLARE  -->
+    <!-- MOST POPULAR SECTION  -->
     <div class="container">
-        <div class="row align-items-end  my-3">
+        <div class="row">
+            <div class="col-12 text-center my-4">
+                <div class="popular-title">
+                    Most popular houses
+                    <div class="popular-subtitle">
+                        choose the right apartment, house or B&B to satisfy your person
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                qui verranno visualizzate le card degli appartamenti in evidenza!
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH AND CARD SECTION  -->
+    <div class="container my-5">
+
+        <!-- SEARCHBAR  -->
+        <div class="row justify-content-center text-center">
+            <div class="popular-title mb-3">
+                Search your destination
+                <div class="popular-subtitle">
+                    find the perfect avaible apartment for your trip
+                </div>
+            </div>
+            <div class="col-6 d-flex">
+                <input type="text" v-model="query" class="form-control" name="query" id="query">
+                <router-link class="search-button ms-2"
+                    :to="{ name: 'search', params: { query: query } }">Search</router-link>
+            </div>
+        </div>
+
+        <!-- <div class="row justify-content-center align-items-end my-3">
             <div class="col-6">
-                <label for="query" class="d-block mb-2">Search a destination</label>
+                <label for="query" class="d-block mb-2">Search your destination</label>
                 <input type="text" v-model="query" class="form-control" name="query" id="query">
             </div>
             <div class="col-6">
-                <router-link class="btn btn-primary"
-                    :to="{ name: 'search', params: { query: query } }">Cerca</router-link>
+                <router-link class="dark-button" :to="{ name: 'search', params: { query: query } }">Search</router-link>
             </div>
-            <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
+        </div> -->
 
-                <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
-            </div>
+        <!-- CARD CICLATE  -->
+        <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
+            <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
         </div>
     </div>
     <AppFooter />
 
 </template>
 <style scoped lang="scss">
-@use '../styles/generals.scss';
+@use '../styles/generals.scss' as *;
+
+.popular-title {
+    font-size: 50px;
+
+    .popular-subtitle {
+        font-size: 20px;
+    }
+}
 </style>

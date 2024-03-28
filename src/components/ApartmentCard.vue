@@ -29,7 +29,7 @@ export default {
 
 <template>
     <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3 mb-5 mc-card">
-        <div>
+        <div class="p-0">
             <img :src="getImage()">
         </div>
         <div class="label">
@@ -56,7 +56,9 @@ export default {
 
     img {
         max-width: 100%;
-        height: 300px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: 50% 0%;
         object-fit: cover;
         border-radius: 8px;
         box-shadow: 0px 2px 10px 2px #c2c2c2;
