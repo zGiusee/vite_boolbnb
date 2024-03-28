@@ -22,6 +22,7 @@ export default {
             radius: 20,
             bathrooms: 0,
             apartments: null,
+            error: '',
         }
     },
     created() {
@@ -31,6 +32,9 @@ export default {
         getApartments() {
             axios.get(`${this.store.endpoint}/api/search/?query=${this.$route.params.query}&radius=20`).then((response) => {
                 this.apartments = response.data.results;
+            }).catch((error) => {
+                this.apartments = null;
+                this.error = 'There are no apartments matching the entered parameters.'
             })
 
         },
@@ -63,7 +67,8 @@ export default {
 
                 window.history.pushState({}, '', query + radius + beds + rooms + bathrooms)
             }).catch((error) => {
-                console.log('error');
+                this.apartments = null;
+                this.error = 'There are no apartments matching the entered parameters...'
             })
         },
         // COUNTERS
@@ -193,8 +198,14 @@ export default {
             </div>
         </div>
 
+
         <!-- CARD CICLATE  -->
-        <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
+        <div v-if="apartments == null || apartments.length == 0">
+            <div class="error">
+                {{ error }}
+            </div>
+        </div>
+        <div v-else class="row column-gap-1 justify-content-around mt-5 justify-content-center">
             <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
         </div>
     </div>
@@ -203,6 +214,12 @@ export default {
 </template>
 <style scoped lang="scss">
 @use '../styles/generals.scss' as *;
+
+.error {
+    font-size: 26px;
+    padding: 70px 0px;
+    text-align: center;
+}
 
 .popular-title {
     font-size: 50px;
