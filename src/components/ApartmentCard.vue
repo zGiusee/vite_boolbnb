@@ -59,7 +59,6 @@ export default {
         aspect-ratio: 1 / 1;
         object-fit: cover;
         object-position: 50% 0%;
-        object-fit: cover;
         border-radius: 8px;
         box-shadow: 0px 2px 10px 2px #c2c2c2;
         transition: all .2s ease-in-out;
