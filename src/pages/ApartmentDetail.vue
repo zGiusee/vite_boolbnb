@@ -95,39 +95,7 @@ export default {
         </div>
     </div>
     <div v-else>
-        <form @submit.prevent="sendMessage()" method="post">
-            <div class="row justify-content-center py-5">
-                <div class="col-6">
-                    <div class="row">
-                        <div class="col py-3">
-                            <input v-model="name" type="text" name="name" id="name" class="form-control"
-                                placeholder="First name" required>
-                            <p v-for="(error, index) in errors.name" :key="`message-error-${index}`"
-                                class="text-danger">
-                                {{ error }} </p>
 
-                        </div>
-                        <div class="col py-3">
-                            <input type="text" v-model="email" class="form-control" placeholder="Email" name="email"
-                                id="email" required>
-                            <p v-for="(error, index) in errors.email" :key="`message-error-${index}`"
-                                class="text-danger">
-                                {{ error }}</p>
-                        </div>
-                        <div class="py-3">
-
-                            <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" v-model="description" name="description" id="description"
-                                rows="3"></textarea>
-                            <p v-for="(error, index) in errors.description" :key="`message-error-${index}`"
-                                class="text-danger">{{ error }}</p>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary"> Invia</button>
-                    </div>
-                </div>
-            </div>
-        </form>
         <div class="container">
             <div class="row">
 
@@ -241,6 +209,37 @@ export default {
             </div>
         </div>
     </div>
+    <form @submit.prevent="sendMessage()" method="post">
+        <div class="row justify-content-center py-5">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col py-3">
+                        <input v-model="name" type="text" name="name" id="name" class="form-control"
+                            placeholder="First name" required>
+                        <p v-for="(error, index) in errors.name" :key="`message-error-${index}`" class="text-danger">
+                            {{ error }} </p>
+
+                    </div>
+                    <div class="col py-3">
+                        <input type="text" v-model="email" class="form-control" placeholder="Email" name="email"
+                            id="email" required>
+                        <p v-for="(error, index) in errors.email" :key="`message-error-${index}`" class="text-danger">
+                            {{ error }}</p>
+                    </div>
+                    <div class="py-3">
+
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" v-model="description" name="description" id="description"
+                            rows="3"></textarea>
+                        <p v-for="(error, index) in errors.description" :key="`message-error-${index}`"
+                            class="text-danger">{{ error }}</p>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary"> Invia</button>
+                </div>
+            </div>
+        </div>
+    </form>
     <AppFooter />
 </template>
 <style scoped lang="scss">
