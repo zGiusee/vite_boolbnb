@@ -35,7 +35,6 @@ export default {
                     page: page_number
                 }
             }).then((response) => {
-
                 this.apartments = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
@@ -88,6 +87,14 @@ export default {
         <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
             <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
         </div>
+    </div>
+
+    <!-- TASTI NAVIGAZIONE PAGINE  -->
+    <div class="container text-center mb-5">
+        <button :class="currentPage == 1 ? 'my-disabled' : ''" @click=" getApartment(currentPage - 1)"
+            class="nav-button me-2"><i class="bi bi-chevron-left" :disabled="currentPage == 1"></i></button>
+        <button :class="currentPage == lastPage ? 'my-disabled' : ''" @click="getApartment(currentPage + 1)"
+            class="nav-button" :disabled="currentPage == lastPage"><i class="bi bi-chevron-right"></i></button>
     </div>
     <AppFooter />
 

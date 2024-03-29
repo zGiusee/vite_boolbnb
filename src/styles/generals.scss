@@ -94,3 +94,36 @@ a {
         }
     }
 }
+
+.nav-button {
+    font-size: 12px;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 5px 15px;
+    background-color: $my_blue;
+    transition: all 0.6s;
+
+    &:hover {
+        background-color: $my_lightblue;
+        color: white;
+
+        a {
+            color: white;
+        }
+    }
+
+}
+
+.my-disabled {
+    background-color: $my_bluetwo;
+
+    &:hover {
+        background-color: $my_bluetwo;
+        color: white;
+
+        a {
+            color: white;
+        }
+    }
+}
