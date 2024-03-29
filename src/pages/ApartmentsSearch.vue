@@ -40,31 +40,18 @@ export default {
         },
         getApartmentsRefresh(query, beds, rooms, radius, bathrooms) {
 
-            if (beds != 0) {
-                beds = `&beds=${beds}`;
-            } else {
-                beds = '&beds=0';
-            }
-            if (rooms != 0) {
-                rooms = `&rooms=${rooms}`;
-            } else {
-                rooms = '&rooms=0';
-            }
-            if (bathrooms != 0) {
-                bathrooms = `&bathrooms=${bathrooms}`;
-            } else {
-                bathrooms = '&bathrooms=0';
-            }
-            if (radius != 20) {
-                radius = `&radius=${radius}`;
-            } else {
-                radius = '&radius=20';
-            }
+            // Definisco i valori e gli applico la sintassi per la chiamata API
+            beds = `&beds=${beds}`;
+            rooms = `&rooms=${rooms}`;
+            bathrooms = `&bathrooms=${bathrooms}`;
+            radius = `&radius=${radius}`;
 
             axios.get(`${this.store.endpoint}/api/search/?query=${query}${radius}${beds}${rooms}${bathrooms}`).then((response) => {
+                // Rimuovo i vecchi appartamenti
                 this.apartments = null;
+                // Recupero quelli nuovi
                 this.apartments = response.data.results;
-
+                // Aggiorno la url della pagina
                 window.history.pushState({}, '', query + radius + beds + rooms + bathrooms)
             }).catch((error) => {
                 this.apartments = null;
