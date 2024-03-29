@@ -137,10 +137,10 @@ export default {
                     <label for="Beds" class=" d-block d-lg-inline-block ">Beds</label>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="bedsDecrement"><span
-                                :class="beds == 0 ? 'my-disabled' : ''">-</span></button>
+                                :class="beds == 0 ? 'my-counter-disabled' : ''">-</span></button>
                         <input type="text" min="0" max="99" size="1" maxlength="2" v-model="beds" name="beds" id="beds">
                         <button type="button" @click="bedsIncrement"><span
-                                :class="beds == 99 ? 'my-disabled' : ''">+</span></button>
+                                :class="beds == 99 ? 'my-counter-disabled' : ''">+</span></button>
                     </div>
                 </div>
             </div>
@@ -151,11 +151,11 @@ export default {
                     <label for="rooms" class=" d-block d-lg-inline-block ">Rooms</label>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="roomsDecrement"><span
-                                :class="rooms == 0 ? 'my-disabled' : ''">-</span></button>
+                                :class="rooms == 0 ? 'my-counter-disabled' : ''">-</span></button>
                         <input type="text" min="0" max="99" size="1" maxlength="2" v-model="rooms" name="rooms"
                             id="rooms">
                         <button type="button" @click="roomsIncrement"><span
-                                :class="rooms == 99 ? 'my-disabled' : ''">+</span></button>
+                                :class="rooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
                     </div>
                 </div>
             </div>
@@ -166,11 +166,11 @@ export default {
                     <label for="bathrooms" class=" d-block d-lg-inline-block ">Bathrooms</label>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="bathroomsDecrement"><span
-                                :class="bathrooms == 0 ? 'my-disabled' : ''">-</span></button>
+                                :class="bathrooms == 0 ? 'my-counter-disabled' : ''">-</span></button>
                         <input type="text" min="0" max="99" size="1" maxlength="2" v-model="bathrooms" name="bathrooms"
                             id="bathrooms">
                         <button type="button" @click="bathroomsIncrement"><span
-                                :class="bathrooms == 99 ? 'my-disabled' : ''">+</span></button>
+                                :class="bathrooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
                     </div>
                 </div>
             </div>
@@ -216,7 +216,7 @@ export default {
     }
 }
 
-.my-disabled {
+.my-counter-disabled {
     color: rgb(202, 202, 202);
     cursor: default;
 }
