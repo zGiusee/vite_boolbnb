@@ -22,12 +22,22 @@ export default {
 
 <template>
     <AppHeader />
-    <div class="container vh-100">
-        <h1>ERROR-404 This page does not exists</h1>
+    <div class="container-fluid h d-flex justify-content-center align-items-center bg-blue">
+        <div>
+            <h1>ERROR-404 This page does not exists</h1>
+        </div>
     </div>
     <AppFooter />
 </template>
 
 <style scoped lang="scss">
 @use '../styles/generals.scss' as *;
+
+.h{
+    height: calc(100vh - 100px);
+}
+
+.bg-blue{
+    color: #4ec0ff;
+}
 </style>
