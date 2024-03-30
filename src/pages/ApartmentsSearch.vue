@@ -193,7 +193,7 @@ export default {
                 {{ error }}
             </div>
         </div>
-        <div v-else class="row column-gap-1 justify-content-around mt-5 justify-content-center">
+        <div v-else class="row column-gap-5 mt-5">
             <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
         </div>
     </div>
