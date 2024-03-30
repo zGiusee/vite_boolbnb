@@ -77,7 +77,11 @@ export default {
             });
         },
         validateForm() {
+
+            // definisco oggetto vuoto per gli errori
             this.errors = {};
+
+            // definisco validazioni per name, email e description
             if (this.name.length > 50) {
                 this.errors.name = 'The name must be a maximum of 50 characters long!';
             }
@@ -87,6 +91,8 @@ export default {
             if (!this.description) {
                 this.errors.description = 'The message is required!';
             }
+
+            // controllo se errors è vuoto. se le chiavi dell'oggetto sono uguali a zero, il form è valido e può essere inviato
             return Object.keys(this.errors).length === 0;
         },
     }
