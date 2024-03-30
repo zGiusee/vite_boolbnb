@@ -88,6 +88,9 @@ export default {
             if (!this.email) {
                 this.errors.email = 'The email is required!';
             }
+            if (this.email.length > 255) {
+                this.errors.email = 'The email must be a maximum of 255 characters long!'
+            }
             if (!this.description) {
                 this.errors.description = 'The message is required!';
             }
