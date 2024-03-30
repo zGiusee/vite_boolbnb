@@ -27,7 +27,7 @@ export default {
         getApartment() {
             axios.get(`${this.store.endpoint}/api/apartment/${this.$route.params.slug}`).then((response) => {
                 this.apartment = response.data.apartment;
-                console.log(this.apartment);
+                console.log(response.data.user);
                 if (this.apartment == null) {
                     this.$router.push({
                         name: 'not-found',
@@ -215,7 +215,7 @@ export default {
                 <div class="row">
                     <div class="col py-3">
                         <input v-model="name" type="text" name="name" id="name" class="form-control"
-                            placeholder="First name" required>
+                            placeholder="First name">
                         <p v-for="(error, index) in errors.name" :key="`message-error-${index}`" class="text-danger">
                             {{ error }} </p>
 
