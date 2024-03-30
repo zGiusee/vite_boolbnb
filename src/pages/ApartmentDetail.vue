@@ -52,9 +52,12 @@ export default {
             return `${this.store.endpoint}${image} `
         },
         sendMessage() {
+
+            //controllo cosa mi ritorna la funzione validateForm. se è false, interrompo l'esecuzione di sendMessage() (il form non è valido e non viene mandato al server)
             if (!this.validateForm()) {
                 return;
             }
+
             const data = {
                 apartment_id: this.apartment.id,
                 name: this.name,
@@ -95,7 +98,7 @@ export default {
                 this.errors.description = 'The message is required!';
             }
 
-            // controllo se errors è vuoto. se le chiavi dell'oggetto sono uguali a zero, il form è valido e può essere inviato
+            // controllo se errors è vuoto. se le chiavi dell'oggetto sono uguali a zero, mi restituisce true (dalla funzione del sendMessage dò l'okay per l'invio del form)
             return Object.keys(this.errors).length === 0;
         },
     }
