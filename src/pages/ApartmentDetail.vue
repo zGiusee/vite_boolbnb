@@ -18,6 +18,7 @@ export default {
             description: '',
             errors: {},
             error: '',
+            thankyouMessage: false,
         }
     },
     created() {
@@ -78,6 +79,7 @@ export default {
                     this.name = '';
                     this.email = '';
                     this.description = '';
+                    this.thankyouMessage = true;
 
                     // this.$router.push({
                     //     name: 'thank-you',
@@ -273,6 +275,13 @@ export default {
                     </div>
                 </div>
             </div>
+
+            <div v-if="thankyouMessage" class="col-12 text-center mb-5 popular-title">
+                Thank you!
+                <div class="popular-subtitle">
+                    Your message has been successfully submit, you will soon hear from the apartment owner.
+                </div>
+            </div>
         </form>
     </div>
 
@@ -295,6 +304,7 @@ export default {
 
 .img-size {
     width: 630px;
+    max-width: 100%;
     border-radius: 10px;
 }
 
