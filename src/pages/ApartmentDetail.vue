@@ -262,7 +262,7 @@ export default {
 
 
                         <!-- MAPPA  -->
-                        <MapTry />>
+
                     </div>
                 </div>
 

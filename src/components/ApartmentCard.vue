@@ -73,6 +73,10 @@ export default {
         }
     }
 
+    a {
+        color: black;
+    }
+
     .card-tit {
         font-size: 20px;
     }

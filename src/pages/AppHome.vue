@@ -35,7 +35,7 @@ export default {
                     page: page_number
                 }
             }).then((response) => {
-                this.apartments = response.data.results.data;
+                this.apartments = response.data.results.data.filter(apartment => apartment.visible);
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             })
@@ -72,7 +72,7 @@ export default {
             <div class="popular-title mb-3">
                 Search your destination
                 <div class="popular-subtitle">
-                    Find the perfect avaible apartment for your trip
+                    Find the perfect available apartment for your trip
                 </div>
             </div>
             <div class="col-12 col-sm-10 col-lg-6 d-flex">
