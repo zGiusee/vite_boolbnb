@@ -31,7 +31,9 @@ export default {
     methods: {
         getApartments() {
             axios.get(`${this.store.endpoint}/api/search/?query=${this.$route.params.query}&radius=20`).then((response) => {
+
                 this.apartments = response.data.results;
+
             }).catch((error) => {
                 this.apartments = null;
                 this.error = 'There are no apartments matching the entered parameters.'
@@ -49,10 +51,18 @@ export default {
             axios.get(`${this.store.endpoint}/api/search/?query=${query}${radius}${beds}${rooms}${bathrooms}`).then((response) => {
                 // Rimuovo i vecchi appartamenti
                 this.apartments = null;
+
                 // Recupero quelli nuovi
                 this.apartments = response.data.results;
+
                 // Aggiorno la url della pagina
                 window.history.pushState({}, '', query + radius + beds + rooms + bathrooms)
+
+                if (this.apartments.length == 0) {
+                    this.apartments = null;
+                    this.error = 'There are no apartments matching the entered parameters...'
+                }
+
             }).catch((error) => {
                 this.apartments = null;
                 this.error = 'There are no apartments matching the entered parameters...'
@@ -188,7 +198,7 @@ export default {
 
 
         <!-- CARD CICLATE  -->
-        <div v-if="apartments == null || apartments.length == 0">
+        <div v-if="apartments == null || apartments.length === 0">
             <div class="error">
                 {{ error }}
             </div>
