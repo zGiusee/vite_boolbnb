@@ -20,6 +20,7 @@ export default {
         return {
             store,
             apartments: [],
+            address_list: [],
             query: ' ',
             currentPage: 1,
             lastPage: null,
@@ -39,7 +40,18 @@ export default {
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             })
-        }
+        },
+        //Funzione per l'autocomplete
+        search() {
+            this.address_list = [];
+            axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
+                response.data.results.forEach(element => {
+                    this.address_list.push(element.address.freeformAddress);
+                    console.log(this.address_list)
+                });
+
+            })
+        },
     },
 }
 </script>
@@ -76,8 +88,11 @@ export default {
                 </div>
             </div>
             <div class="col-12 col-sm-10 col-lg-6 d-flex">
-                <input type="text" v-model="query" placeholder="Es. Bologna" class="form-control" name="query"
-                    id="query">
+                <input type="text" v-model="query" @keypress="search()" list="address_list" placeholder="Es. Bologna"
+                    class="form-control" name="query" id="query">
+                <datalist id="address_list">
+                    <option v-for="(address, index) in address_list" :key="index" :value="address"></option>
+                </datalist>
                 <router-link class="search-button ms-2"
                     :to="{ name: 'search', params: { query: query } }">Search</router-link>
             </div>

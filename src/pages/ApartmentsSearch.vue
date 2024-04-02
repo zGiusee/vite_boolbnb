@@ -90,8 +90,8 @@ export default {
             this.address_list = [];
             axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
                 response.data.results.forEach(element => {
+
                     this.address_list.push(element.address.freeformAddress);
-                    console.log(this.address_list)
                 });
 
             })
@@ -149,17 +149,13 @@ export default {
 
             <!-- ADRESS INPUT -->
             <div class="col-12 col-md-8 d-flex justify-content-center mt-4 search-container">
-                <label for="query" class="d-flex align-items-center">Address</label>
-                <input type="text" list="address_list" @keypress="search()" v-model="query" name="query" id="query">
-                <datalist id="address_list">
-                    <option v-for="(address, index) in address_list" :key="index" :value="address">
-                    </option>
-                </datalist>
-            </div>
-            <div>
-                <div v-for="(address, index) in address_list" :key="index" :value="address">
-                    {{ address }}
-                </div>
+                <form action="">
+                    <label for="query" class="d-flex align-items-center">Address</label>
+                    <input type="text" list="address_list" @keypress="search()" v-model="query" name="query" id="query">
+                    <datalist id="address_list">
+                        <option v-for="address in address_list" :value="address"></option>
+                    </datalist>
+                </form>
             </div>
 
             <!-- Services INPUT -->
