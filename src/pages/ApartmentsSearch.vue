@@ -85,17 +85,17 @@ export default {
                 this.error = 'There are no apartments matching the entered parameters...'
             })
         },
-        //Funzione per l'autocomplete
-        search() {
-            this.address_list = [];
-            axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
-                response.data.results.forEach(element => {
+        // //Funzione per l'autocomplete
+        // search() {
+        //     this.address_list = [];
+        //     axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
+        //         response.data.results.forEach(element => {
 
-                    this.address_list.push(element.address.freeformAddress);
-                });
+        //             this.address_list.push(element.address.freeformAddress);
+        //         });
 
-            })
-        },
+        //     })
+        // },
         // COUNTERS
         bathroomsIncrement() {
             if (this.bathrooms < 99) {
@@ -147,14 +147,14 @@ export default {
                 </div>
             </div>
 
-            <!-- ADRESS INPUT -->
+            ADRESS INPUT
             <div class="col-12 col-md-8 d-flex justify-content-center mt-4 search-container">
                 <form action="">
                     <label for="query" class="d-flex align-items-center">Address</label>
                     <input type="text" list="address_list" @keypress="search()" v-model="query" name="query" id="query">
-                    <datalist id="address_list">
+                    <!-- <datalist id="address_list">
                         <option v-for="address in address_list" :value="address"></option>
-                    </datalist>
+                    </datalist> -->
                 </form>
             </div>
 
