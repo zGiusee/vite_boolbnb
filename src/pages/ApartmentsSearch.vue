@@ -17,10 +17,10 @@ export default {
         return {
             store,
             query: ' ',
-            beds: 0,
-            rooms: 0,
+            beds: 1,
+            rooms: 1,
             radius: 20,
-            bathrooms: 0,
+            bathrooms: 1,
             apartments: null,
             error: '',
         }
@@ -75,7 +75,7 @@ export default {
             }
         },
         bathroomsDecrement() {
-            if (this.bathrooms > 0) {
+            if (this.bathrooms > 1) {
                 this.bathrooms--;
             }
         },
@@ -85,7 +85,7 @@ export default {
             }
         },
         bedsDecrement() {
-            if (this.beds > 0) {
+            if (this.beds > 1) {
                 this.beds--;
             }
         },
@@ -95,7 +95,7 @@ export default {
             }
         },
         roomsDecrement() {
-            if (this.rooms > 0) {
+            if (this.rooms > 1) {
                 this.rooms--;
             }
         }
@@ -147,7 +147,7 @@ export default {
                     <label for="Beds" class=" d-block d-lg-inline-block ">Beds</label>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="bedsDecrement"><span
-                                :class="beds == 0 ? 'my-counter-disabled' : ''">-</span></button>
+                                :class="beds == 1 ? 'my-counter-disabled' : ''">-</span></button>
                         <input type="text" min="0" max="99" size="1" maxlength="2" v-model="beds" name="beds" id="beds">
                         <button type="button" @click="bedsIncrement"><span
                                 :class="beds == 99 ? 'my-counter-disabled' : ''">+</span></button>
@@ -161,7 +161,7 @@ export default {
                     <label for="rooms" class=" d-block d-lg-inline-block ">Rooms</label>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="roomsDecrement"><span
-                                :class="rooms == 0 ? 'my-counter-disabled' : ''">-</span></button>
+                                :class="rooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
                         <input type="text" min="0" max="99" size="1" maxlength="2" v-model="rooms" name="rooms"
                             id="rooms">
                         <button type="button" @click="roomsIncrement"><span
@@ -176,7 +176,7 @@ export default {
                     <label for="bathrooms" class=" d-block d-lg-inline-block ">Bathrooms</label>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="bathroomsDecrement"><span
-                                :class="bathrooms == 0 ? 'my-counter-disabled' : ''">-</span></button>
+                                :class="bathrooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
                         <input type="text" min="0" max="99" size="1" maxlength="2" v-model="bathrooms" name="bathrooms"
                             id="bathrooms">
                         <button type="button" @click="bathroomsIncrement"><span
