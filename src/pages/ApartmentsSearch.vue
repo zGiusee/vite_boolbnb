@@ -22,13 +22,24 @@ export default {
             radius: 20,
             bathrooms: 1,
             apartments: null,
+            services: null,
+            address_list: [],
+            selectedServices: [],
             error: '',
         }
     },
     created() {
         this.getApartments();
+        this.getServices();
     },
     methods: {
+        getServices() {
+            axios.get(`${this.store.endpoint}/api/services`).then((response) => {
+                this.services = response.data.services;
+            }).catch((error) => {
+                this.services = null;
+            })
+        },
         getApartments() {
             axios.get(`${this.store.endpoint}/api/search/?query=${this.$route.params.query}&radius=20`).then((response) => {
 
@@ -48,7 +59,13 @@ export default {
             bathrooms = `&bathrooms=${bathrooms}`;
             radius = `&radius=${radius}`;
 
-            axios.get(`${this.store.endpoint}/api/search/?query=${query}${radius}${beds}${rooms}${bathrooms}`).then((response) => {
+            // Trasformo l'array dei servizi in una stringa separata da virgole in modo che possa usarla per effettuare la query
+            let servicesIds = '';
+            if (this.selectedServices.length > 0) {
+                servicesIds = `&services=${this.selectedServices.join(',')}`;
+            }
+
+            axios.get(`${this.store.endpoint}/api/search/?query=${query}${radius}${beds}${rooms}${bathrooms}${servicesIds}`).then((response) => {
                 // Rimuovo i vecchi appartamenti
                 this.apartments = null;
 
@@ -56,7 +73,7 @@ export default {
                 this.apartments = response.data.results;
 
                 // Aggiorno la url della pagina
-                window.history.pushState({}, '', query + radius + beds + rooms + bathrooms)
+                window.history.pushState({}, '', query + radius + beds + rooms + bathrooms + servicesIds)
 
                 if (this.apartments.length == 0) {
                     this.apartments = null;
@@ -66,6 +83,17 @@ export default {
             }).catch((error) => {
                 this.apartments = null;
                 this.error = 'There are no apartments matching the entered parameters...'
+            })
+        },
+        //Funzione per l'autocomplete
+        search() {
+            this.address_list = [];
+            axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
+                response.data.results.forEach(element => {
+                    this.address_list.push(element.address.freeformAddress);
+                    console.log(this.address_list)
+                });
+
             })
         },
         // COUNTERS
@@ -120,9 +148,40 @@ export default {
             </div>
 
             <!-- ADRESS INPUT -->
-            <div class="col-12 d-flex justify-content-center mt-4 search-container">
-                <label for=" query">Address</label>
-                <input type="text" class="w-50" v-model="query" name="query" id="query">
+            <div class="col-12 col-md-8 d-flex justify-content-center mt-4 search-container">
+                <label for="query" class="d-flex align-items-center">Address</label>
+                <input type="text" list="address_list" @keypress="search()" v-model="query" name="query" id="query">
+                <datalist id="address_list">
+                    <option v-for="(address, index) in address_list" :key="index" :value="address">
+                    </option>
+                </datalist>
+            </div>
+            <div>
+                <div v-for="(address, index) in address_list" :key="index" :value="address">
+                    {{ address }}
+                </div>
+            </div>
+
+            <!-- Services INPUT -->
+            <div class="col-12 col-md-4 pt-3 d-flex justify-content-center align-items-center">
+                <div>
+                    <div class=" dropend mx-1">
+                        <button type="button" class="search-button down-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Services
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="px-3">
+                                <div class="form-check-inline check_service" v-for="service in services"
+                                    :key="service.id">
+                                    <input type="checkbox" class="form-check-input" :value="service.id"
+                                        v-model="selectedServices">
+                                    <label class="form-check-label">{{ service.name }}</label><br>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!-- RADIUS SLECET INPUT -->
@@ -185,17 +244,24 @@ export default {
                 </div>
             </div>
 
-            <!-- ADRESS BUTTON -->
-            <div class="col-12 d-flex justify-content-center mt-4">
-                <div>
-                    <button type="button" class="search-button"
-                        @click="getApartmentsRefresh(query, beds, rooms, radius, bathrooms)">Search
-                    </button>
-                </div>
-            </div>
 
         </div>
 
+        <!-- ADRESS BUTTON -->
+        <div class="col-12 d-flex justify-content-center mt-4">
+            <div>
+                <button type="button" class="search-button"
+                    @click="getApartmentsRefresh(query, beds, rooms, radius, bathrooms)">Search
+                </button>
+            </div>
+        </div>
+
+        <!-- <div class="col-12">
+                <div v-for="service in services" :key="service.id">
+                    <input type="checkbox" class="form-check-input" :value="service.id" v-model="selectedServices">
+                    <label class="form-check-label">{{ service.name }}</label><br>
+                </div>
+            </div> -->
 
         <!-- CARD CICLATE  -->
         <div v-if="apartments == null || apartments.length === 0">
@@ -241,7 +307,9 @@ export default {
 
     //STILE PER LA SEARCHBOX
     .search-container {
+
         input {
+            width: 100%;
             padding: 5px 0px;
             border: 1px solid $my_lightblue;
 
