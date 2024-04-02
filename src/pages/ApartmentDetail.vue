@@ -1,12 +1,16 @@
 <script>
 import AppHeader from '../components/AppHeader.vue';
 import AppFooter from '../components/AppFooter.vue';
+import MapTry from '../components/MapTry.vue';
 import { store } from '../store.js';
 import axios from 'axios';
+import tt from '@tomtom-international/web-sdk-maps';
+
 export default {
     components: {
         AppHeader,
         AppFooter,
+        MapTry
     },
     data() {
         return {
@@ -23,20 +27,27 @@ export default {
     },
     created() {
         this.getApartment();
+        // this.initializeMap();
     },
     methods: {
         getApartment() {
             axios.get(`${this.store.endpoint}/api/apartment/${this.$route.params.slug}`).then((response) => {
                 this.apartment = response.data.apartment;
-                console.log(response.data.user);
+                console.log(this.apartment);
+
+
                 if (this.apartment == null) {
                     this.$router.push({
                         name: 'not-found',
                     })
                 }
+
+
+
             }).catch((error) => {
                 this.error = 'There are no apartments matching the entered parameters...'
             })
+
         },
         getImage() {
             let image;
@@ -108,6 +119,32 @@ export default {
             // controllo se errors è vuoto. se le chiavi dell'oggetto sono uguali a zero, mi restituisce true (dalla funzione del sendMessage dò l'okay per l'invio del form)
             return Object.keys(this.errors).length === 0;
         },
+
+        // initializeMap() {
+        //     // Effettua una chiamata Axios per ottenere i dati della mappa
+        //     axios.get('https://api.example.com/get-map-data')
+        //         .then(response => {
+        //             var data = response.data;
+        //             var apiKey = this.store.apiKey;
+
+        //             // Inizializza la mappa dinamica con i dati ottenuti
+        //             var map = tt.map({
+        //                 key: apiKey,
+        //                 container: 'map',
+        //                 center: [45.83429200, 9.51028700],
+        //                 zoom: 12
+        //             });
+
+        //             // Aggiungi un marker alla mappa
+        //             // new tt.Marker()
+        //             //     .setLngLat([data.marker.lat, data.marker.lon])
+        //             //     .addTo(map);
+        //         })
+        //         .catch(error => {
+        //             console.error('Errore nella chiamata Axios:', error);
+        //         });
+        // }
+
     },
 }
 </script>
@@ -223,9 +260,9 @@ export default {
                             <p>{{ apartment.address }}</p>
                         </div>
 
-                        <div class="map mb-5">
 
-                        </div>
+                        <!-- MAPPA  -->
+                        <MapTry />>
                     </div>
                 </div>
 
@@ -312,8 +349,8 @@ export default {
     width: 75%;
 }
 
-.map {
-    height: 500px;
-    background-color: #4ec0ff;
+#map {
+    height: 400px;
+    width: 100%;
 }
 </style>
