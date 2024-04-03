@@ -1,43 +1,52 @@
 <script>
-import { onMounted } from 'vue';
 import tt from '@tomtom-international/web-sdk-maps';
 import { store } from '../store.js';
 
 export default {
+    name: 'MapTry',
+    props: {
+        lat: String,
+        lon: String
+    },
     data() {
         return {
             store,
         }
     },
-    setup() {
-        onMounted(() => {
-            // Inizializza la mappa dinamica
+    mounted() {
+        this.getMap()
+    },
+    methods: {
+        getMap() {
+            let lon = this.lon;
+            let lat = this.lat;
+            let center = [lon, lat];
+            console.log(center)
+
             const map = tt.map({
-                key: 'yGiTiJ2bxVartizBSg9Wlc6ipR2Zb3ya',
-                container: 'map', // 'map' deve corrispondere all'id dell'elemento div nella tua pagina
-                style: 'tomtom://vector/1/basic-main',
-                center: [45.83429200, 9.51028700],
-                zoom: 10,
+                key: this.store.apiKey,
+                container: 'map',
+                center: center,
+                zoom: 16,
             });
 
-            // Aggiungi un marker
-            new tt.Marker()
-                .setLngLat([45.83429200, 9.51028700])
-                .addTo(map);
-        });
-
-        return {};
-    },
+            const marker = new tt.Marker().setLngLat(center).addTo(map);
+        }
+    }
 };
 </script>
 
-<template lang="">
-    <div>
-        <div ref="map" id="map" style="width: 100%; height: 400px;"></div>
+<template>
+    <div class="col-12">
+        <div id="map" class="my-map"></div>
 
     </div>
+
 </template>
 
-<style lang="">
-
+<style scoepd lang="scss">
+.my-map {
+    width: 100%;
+    height: 400px;
+}
 </style>

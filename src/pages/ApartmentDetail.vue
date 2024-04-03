@@ -34,15 +34,13 @@ export default {
             axios.get(`${this.store.endpoint}/api/apartment/${this.$route.params.slug}`).then((response) => {
                 this.apartment = response.data.apartment;
                 console.log(this.apartment);
-
+                console.log(this.apartment.longitude, this.apartment.latitude);
 
                 if (this.apartment == null) {
                     this.$router.push({
                         name: 'not-found',
                     })
                 }
-
-
 
             }).catch((error) => {
                 this.error = 'There are no apartments matching the entered parameters...'
@@ -120,31 +118,6 @@ export default {
             return Object.keys(this.errors).length === 0;
         },
 
-        // initializeMap() {
-        //     // Effettua una chiamata Axios per ottenere i dati della mappa
-        //     axios.get('https://api.example.com/get-map-data')
-        //         .then(response => {
-        //             var data = response.data;
-        //             var apiKey = this.store.apiKey;
-
-        //             // Inizializza la mappa dinamica con i dati ottenuti
-        //             var map = tt.map({
-        //                 key: apiKey,
-        //                 container: 'map',
-        //                 center: [45.83429200, 9.51028700],
-        //                 zoom: 12
-        //             });
-
-        //             // Aggiungi un marker alla mappa
-        //             // new tt.Marker()
-        //             //     .setLngLat([data.marker.lat, data.marker.lon])
-        //             //     .addTo(map);
-        //         })
-        //         .catch(error => {
-        //             console.error('Errore nella chiamata Axios:', error);
-        //         });
-        // }
-
     },
 }
 </script>
@@ -159,7 +132,6 @@ export default {
 
         <div class="container">
             <div class="row">
-
 
                 <div class="col-12 py-4">
                     <h2>
@@ -223,7 +195,7 @@ export default {
                     <div class="col-12 mt-5">
 
                         <div class="col-12">
-                            <p><strong><i>What will you find</i></strong></p>
+                            <strong><i>What will you find</i></strong>
                         </div>
 
                         <hr class="w-75">
@@ -252,7 +224,7 @@ export default {
                     <div class="col-12">
 
                         <div class="col-12 mt-5 mb-3">
-                            <h4><i>Where will you be</i></h4>
+                            <strong><i>Where will you be</i></strong>
                             <hr class="w-100">
                         </div>
 
@@ -260,16 +232,19 @@ export default {
                             <p>{{ apartment.address }}</p>
                         </div>
 
-
-                        <!-- MAPPA  -->
-
                     </div>
+
                 </div>
 
+                <!-- MAPPA  -->
+                <MapTry :lon="apartment.longitude" :lat="apartment.latitude" />
 
             </div>
         </div>
     </div>
+
+
+
     <!-- INVIA UN MESSAGGIO SECTION  -->
     <div class="container">
         <div class="popular-title text-center my-5">
@@ -347,10 +322,5 @@ export default {
 
 .w-75 {
     width: 75%;
-}
-
-#map {
-    height: 400px;
-    width: 100%;
 }
 </style>
