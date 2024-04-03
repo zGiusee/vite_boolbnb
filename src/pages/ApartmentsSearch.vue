@@ -16,7 +16,7 @@ export default {
     data() {
         return {
             store,
-            query: ' ',
+            query: '',
             beds: 1,
             rooms: 1,
             radius: 20,
@@ -85,17 +85,20 @@ export default {
                 this.error = 'There are no apartments matching the entered parameters...'
             })
         },
-        // //Funzione per l'autocomplete
-        // search() {
-        //     this.address_list = [];
-        //     axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
-        //         response.data.results.forEach(element => {
+        //Funzione per l'autocomplete
+        search() {
+            this.address_list = [];
 
-        //             this.address_list.push(element.address.freeformAddress);
-        //         });
+            if (this.query != '') {
+                axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
+                    response.data.results.forEach(element => {
 
-        //     })
-        // },
+                        this.address_list.push(element.address.freeformAddress);
+                    });
+
+                })
+            }
+        },
         // COUNTERS
         bathroomsIncrement() {
             if (this.bathrooms < 99) {
@@ -147,16 +150,18 @@ export default {
                 </div>
             </div>
 
-            ADRESS INPUT
+            <!-- ADRESS INPUT -->
             <div class="col-12 col-md-8 d-flex justify-content-center mt-4 search-container">
-                <form action="">
-                    <label for="query" class="d-flex align-items-center">Address</label>
-                    <input type="text" list="address_list" @keypress="search()" v-model="query" name="query" id="query">
-                    <!-- <datalist id="address_list">
-                        <option v-for="address in address_list" :value="address"></option>
-                    </datalist> -->
-                </form>
+
+                <label for="query" class="d-flex align-items-center">Address</label>
+                <input type="text" list="address_list" @keypress="search()" v-model="query" name="query" id="query">
+
+                <datalist id="address_list">
+                    <option v-for="(address, index) in address_list" :value="address"></option>
+                </datalist>
+
             </div>
+            <!-- ADRESS INPUT -->
 
             <!-- Services INPUT -->
             <div class="col-12 col-md-4 pt-3 d-flex justify-content-center align-items-center">
@@ -252,13 +257,6 @@ export default {
             </div>
         </div>
 
-        <!-- <div class="col-12">
-                <div v-for="service in services" :key="service.id">
-                    <input type="checkbox" class="form-check-input" :value="service.id" v-model="selectedServices">
-                    <label class="form-check-label">{{ service.name }}</label><br>
-                </div>
-            </div> -->
-
         <!-- CARD CICLATE  -->
         <div v-if="apartments == null || apartments.length === 0">
             <div class="error">
@@ -306,7 +304,7 @@ export default {
 
         input {
             width: 100%;
-            padding: 5px 0px;
+            padding: 5px 10px;
             border: 1px solid $my_lightblue;
 
             &:focus {
