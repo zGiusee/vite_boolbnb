@@ -12,6 +12,7 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.6",
     "@tomtom-international/web-sdk-plugin-searchbox": "^3.2.0",
+    "@tomtom-international/web-sdk-maps": "^6.25.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",

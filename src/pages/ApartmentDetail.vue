@@ -1,12 +1,16 @@
 <script>
 import AppHeader from '../components/AppHeader.vue';
 import AppFooter from '../components/AppFooter.vue';
+import MapTry from '../components/MapTry.vue';
 import { store } from '../store.js';
 import axios from 'axios';
+import tt from '@tomtom-international/web-sdk-maps';
+
 export default {
     components: {
         AppHeader,
         AppFooter,
+        MapTry
     },
     data() {
         return {
@@ -23,20 +27,25 @@ export default {
     },
     created() {
         this.getApartment();
+        // this.initializeMap();
     },
     methods: {
         getApartment() {
             axios.get(`${this.store.endpoint}/api/apartment/${this.$route.params.slug}`).then((response) => {
                 this.apartment = response.data.apartment;
-                console.log(response.data.user);
+                console.log(this.apartment);
+                console.log(this.apartment.longitude, this.apartment.latitude);
+
                 if (this.apartment == null) {
                     this.$router.push({
                         name: 'not-found',
                     })
                 }
+
             }).catch((error) => {
                 this.error = 'There are no apartments matching the entered parameters...'
             })
+
         },
         getImage() {
             let image;
@@ -108,6 +117,7 @@ export default {
             // controllo se errors è vuoto. se le chiavi dell'oggetto sono uguali a zero, mi restituisce true (dalla funzione del sendMessage dò l'okay per l'invio del form)
             return Object.keys(this.errors).length === 0;
         },
+
     },
 }
 </script>
@@ -122,7 +132,6 @@ export default {
 
         <div class="container">
             <div class="row">
-
 
                 <div class="col-12 py-4">
                     <h2>
@@ -186,7 +195,7 @@ export default {
                     <div class="col-12 mt-5">
 
                         <div class="col-12">
-                            <p><strong><i>What will you find</i></strong></p>
+                            <strong><i>What will you find</i></strong>
                         </div>
 
                         <hr class="w-75">
@@ -215,7 +224,7 @@ export default {
                     <div class="col-12">
 
                         <div class="col-12 mt-5 mb-3">
-                            <h4><i>Where will you be</i></h4>
+                            <strong><i>Where will you be</i></strong>
                             <hr class="w-100">
                         </div>
 
@@ -223,16 +232,19 @@ export default {
                             <p>{{ apartment.address }}</p>
                         </div>
 
-                        <div class="map mb-5">
-
-                        </div>
                     </div>
+
                 </div>
 
+                <!-- MAPPA  -->
+                <MapTry :lon="apartment.longitude" :lat="apartment.latitude" />
 
             </div>
         </div>
     </div>
+
+
+
     <!-- INVIA UN MESSAGGIO SECTION  -->
     <div class="container">
         <div class="popular-title text-center my-5">
@@ -310,10 +322,5 @@ export default {
 
 .w-75 {
     width: 75%;
-}
-
-.map {
-    height: 500px;
-    background-color: #4ec0ff;
 }
 </style>
