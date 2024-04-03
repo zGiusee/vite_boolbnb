@@ -21,7 +21,6 @@ export default {
             let lon = this.lon;
             let lat = this.lat;
             let center = [lon, lat];
-            console.log(center)
 
             const map = tt.map({
                 key: this.store.apiKey,

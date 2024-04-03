@@ -25,9 +25,13 @@ export default {
             thankyouMessage: false,
         }
     },
+    mounted() {
+        window.onload = function () {
+            window.scrollTo(0, 0);
+        };
+    },
     created() {
         this.getApartment();
-        // this.initializeMap();
     },
     methods: {
         getApartment() {
