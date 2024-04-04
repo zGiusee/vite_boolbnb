@@ -1,10 +1,11 @@
 <script>
 import axios from 'axios';
-
 import AppHeader from '../components/AppHeader.vue';
 import AppJumbotron from '../components/AppJumbotron.vue';
 import AppFooter from '../components/AppFooter.vue';
 import ApartmentCard from '../components/ApartmentCard.vue';
+import { services } from '@tomtom-international/web-sdk-services';
+import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
 
 import { store } from '../store'
 
@@ -20,11 +21,36 @@ export default {
         return {
             store,
             apartments: [],
-            address_list: [],
+            ttSearchBox: null,
             query: ' ',
             currentPage: 1,
             lastPage: null,
         }
+    },
+    mounted() {
+        var options = {
+            searchOptions: {
+                key: this.store.apiKey,
+
+                language: "it-IT",
+
+                limit: 5,
+            },
+
+            autocompleteOptions: {
+                key: this.store.apiKey,
+
+                language: "it-IT",
+            },
+        };
+        let myInput = document.getElementById("myInput");
+
+        // Creazione della search box
+        this.ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+        // Applico lo stile
+        let searchBoxHTML = this.ttSearchBox.getSearchBoxHTML();
+        // Appendo la searchbox
+        myInput.appendChild(searchBoxHTML);
     },
     created() {
         this.getApartment();
@@ -41,20 +67,18 @@ export default {
                 this.lastPage = response.data.results.last_page;
             })
         },
-        // Funzione per l'autocomplete
-        search() {
-            this.address_list = [];
+        valueAndSearch() {
+            if (this.ttSearchBox) {
+                // Recupero il valore della searchbox di TomTom
+                let value = this.ttSearchBox.getValue();
 
-            if (this.query != '') {
-                axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
-                    response.data.results.forEach(element => {
+                // Applico il valore alla nostra input
+                this.query = value;
 
-                        this.address_list.push(element.address.freeformAddress);
-                    });
 
-                })
+                this.$router.push({ name: 'search', params: { query: this.query } });
             }
-        },
+        }
     },
 }
 </script>
@@ -90,14 +114,13 @@ export default {
                     Find the perfect available apartment for your trip
                 </div>
             </div>
-            <div class="col-12 col-sm-10 col-lg-6 d-flex">
-                <input type="text" v-model="query" @keypress="search()" list="address_list" placeholder="Es. Bologna"
-                    class="form-control" name="query" id="query">
-                <datalist id="address_list">
-                    <option v-for="(address, index) in address_list" :key="index" :value="address"></option>
-                </datalist>
-                <router-link class="search-button ms-2"
-                    :to="{ name: 'search', params: { query: query } }">Search</router-link>
+            <div class="col-12 d-flex d-flex justify-content-center">
+
+                <!-- Input di TomTom -->
+                <div id="myInput"></div>
+            </div>
+            <div class="col-12 d-flex d-flex justify-content-center mt-3">
+                <button type="button" @click="valueAndSearch" class="search-button">Search</button>
             </div>
 
         </div>

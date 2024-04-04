@@ -5,6 +5,8 @@ import AppHeader from '../components/AppHeader.vue';
 import AppJumbotron from '../components/AppJumbotron.vue';
 import AppFooter from '../components/AppFooter.vue';
 import ApartmentCard from '../components/ApartmentCard.vue';
+import { services } from '@tomtom-international/web-sdk-services';
+import SearchBox from '@tomtom-international/web-sdk-plugin-searchbox';
 
 export default {
     components: {
@@ -23,12 +25,35 @@ export default {
             bathrooms: 1,
             apartments: null,
             services: null,
-            address_list: [],
+            ttSearchBox: null,
             selectedServices: [],
             error: '',
         }
     },
     mounted() {
+        var options = {
+            searchOptions: {
+                key: this.store.apiKey,
+
+                language: "it-IT",
+
+                limit: 5,
+            },
+
+            autocompleteOptions: {
+                key: this.store.apiKey,
+
+                language: "it-IT",
+            },
+        };
+        let myInput = document.getElementById("myInput");
+
+        // Creazione della search box
+        this.ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+        // Applico lo stile
+        let searchBoxHTML = this.ttSearchBox.getSearchBoxHTML();
+        // Appendo la searchbox
+        myInput.appendChild(searchBoxHTML);
 
     },
     created() {
@@ -54,7 +79,13 @@ export default {
             })
 
         },
-        getApartmentsRefresh(query, beds, rooms, radius, bathrooms) {
+        getApartmentsRefresh(beds, rooms, radius, bathrooms) {
+
+
+            let value = this.ttSearchBox.getValue();
+            // Applico il valore alla nostra input
+            this.query = value;
+
 
             // Definisco i valori e gli applico la sintassi per la chiamata API
             beds = `&beds=${beds}`;
@@ -68,7 +99,7 @@ export default {
                 servicesIds = `&services=${this.selectedServices.join(',')}`;
             }
 
-            axios.get(`${this.store.endpoint}/api/search/?query=${query}${radius}${beds}${rooms}${bathrooms}${servicesIds}`).then((response) => {
+            axios.get(`${this.store.endpoint}/api/search/?query=${this.query}${radius}${beds}${rooms}${bathrooms}${servicesIds}`).then((response) => {
                 // Rimuovo i vecchi appartamenti
                 this.apartments = null;
 
@@ -76,7 +107,7 @@ export default {
                 this.apartments = response.data.results.filter(apartment => apartment.visible);
 
                 // Aggiorno la url della pagina
-                window.history.pushState({}, '', query + radius + beds + rooms + bathrooms + servicesIds)
+                window.history.pushState({}, '', this.query + radius + beds + rooms + bathrooms + servicesIds)
 
                 if (this.apartments.length == 0) {
                     this.apartments = null;
@@ -87,20 +118,6 @@ export default {
                 this.apartments = null;
                 this.error = 'There are no apartments matching the entered parameters...'
             })
-        },
-        //Funzione per l'autocomplete
-        search() {
-            this.address_list = [];
-
-            if (this.query != '') {
-                axios.get(`${this.store.tomtom_api}/search/2/geocode/${this.query}.json?key=GYNVgmRpr8c30c7h1MAQEOzsy73GA9Hz&language=it-IT`).then(response => {
-                    response.data.results.forEach(element => {
-
-                        this.address_list.push(element.address.freeformAddress);
-                    });
-
-                })
-            }
         },
         // COUNTERS
         bathroomsIncrement() {
@@ -154,20 +171,15 @@ export default {
             </div>
 
             <!-- ADRESS INPUT -->
-            <div class="col-12 col-md-8 d-flex justify-content-center mt-4 search-container">
+            <div class="col-12 col-md-7 d-flex justify-content-end mt-4 search-container">
 
-                <label for="query" class="d-flex align-items-center">Address</label>
-                <input type="text" list="address_list" @keypress="search()" v-model="query" name="query" id="query">
-
-                <datalist id="address_list">
-                    <option v-for="(address, index) in address_list" :value="address"></option>
-                </datalist>
-
+                <label for="query" class="d-flex align-items-center ">Address</label>
+                <div id="myInput"></div>
             </div>
-            <!-- ADRESS INPUT -->
+
 
             <!-- Services INPUT -->
-            <div class="col-12 col-md-4 pt-3 d-flex justify-content-center align-items-center">
+            <div class="col-12 col-md-5 pt-3 d-flex justify-content-center justify-content-md-start align-items-end ">
                 <div>
                     <div class=" dropend mx-1">
                         <button type="button" class="search-button down-toggle" data-bs-toggle="dropdown"
@@ -255,7 +267,7 @@ export default {
         <div class="col-12 d-flex justify-content-center mt-4">
             <div>
                 <button type="button" class="search-button"
-                    @click="getApartmentsRefresh(query, beds, rooms, radius, bathrooms)">Search
+                    @click="getApartmentsRefresh(beds, rooms, radius, bathrooms)">Search
                 </button>
             </div>
         </div>

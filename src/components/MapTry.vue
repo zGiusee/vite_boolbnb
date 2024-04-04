@@ -38,9 +38,7 @@ export default {
 <template>
     <div class="col-12">
         <div id="map" class="my-map"></div>
-
     </div>
-
 </template>
 
 <style scoepd lang="scss">
