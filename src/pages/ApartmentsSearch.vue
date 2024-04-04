@@ -72,8 +72,8 @@ export default {
                 // Rimuovo i vecchi appartamenti
                 this.apartments = null;
 
-                // Recupero quelli nuovi
-                this.apartments = response.data.results;
+                // Recupero quelli nuovi filtrando per la visibilità
+                this.apartments = response.data.results.filter(apartment => apartment.visible);
 
                 // Aggiorno la url della pagina
                 window.history.pushState({}, '', query + radius + beds + rooms + bathrooms + servicesIds)
