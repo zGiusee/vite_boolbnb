@@ -28,22 +28,24 @@ export default {
 </script>
 
 <template>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3 mb-5 p-0 mc-card">
-        <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">
-            <div class="p-0">
-                <img :src="getImage()">
-            </div>
-            <div class="label">
-                <i class="bi bi-house-check-fill"></i> Avaible
-            </div>
-            <div class="card-tit px-2 pt-3">
-                <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">{{ apartment.title
-                    }}</router-link>
-            </div>
-            <div class="address px-2 pb-3">
-                <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
-            </div>
-        </router-link>
+    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xxl-3 mb-5 p-3">
+        <div class="mc-card">
+            <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">
+                <div class="p-0">
+                    <img :src="getImage()">
+                </div>
+                <div class="label">
+                    <i class="bi bi-house-check-fill"></i> Avaible
+                </div>
+                <div class="card-tit px-2 pt-3">
+                    <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">{{ apartment.title
+                        }}</router-link>
+                </div>
+                <div class="address px-2 pb-3">
+                    <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
+                </div>
+            </router-link>
+        </div>
     </div>
 
 </template>
@@ -56,6 +58,7 @@ export default {
     box-shadow: 0px 2px 10px 2px #c2c2c2;
     position: relative;
     overflow: hidden;
+    height: 100%;
 
     img {
         width: 100%;
