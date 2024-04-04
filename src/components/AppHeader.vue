@@ -33,7 +33,7 @@ export default {
             <div class="row">
 
                 <!-- LOGO  -->
-                <div class="col-4 align-items-center d-none d-sm-flex ">
+                <div class="col-4 align-items-center d-flex d-sm-none logo-mobile-visible">
                     <a class="" href="">
                         <div>
                             <img class="logo" src="../img/logo_1.png" alt="">
@@ -42,11 +42,9 @@ export default {
                 </div>
 
                 <!-- NAV LINKS  -->
-                <div class="col-10 col-sm-4 d-flex align-items-center justify-content-center">
+                <div class="col-4 col-sm-4 d-flex align-items-center justify-content-center">
                     <ul class="menu p-0">
-                        <li v-for="(link, index) in navLinks" class="menu">
-                            <router-link :to="{ name:link.name }"> {{ link.label }}</router-link>
-                        </li>
+
                     </ul>
                 </div>
 
@@ -61,13 +59,17 @@ export default {
                 </div>
 
                 <!-- BOTTONI (MOBILE & TABLET) -->
-                <div class="col-2 col-sm-4 text-end align-self-center d-lg-none">
+                
+                <div class="col-4 col-sm-4 text-end align-self-center d-lg-none">
 
                     <div class="btn-group my-dropdown">
                         <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-list"></i>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end text-end">
+                            <li>
+                                <router-link :to="{ name: 'home' }" class="dropdown-item">Home</router-link>
+                            </li>
                             <li><a class="dropdown-item" href="#">Login</a></li>
                             <li><a class="dropdown-item" href="#">Create an account</a></li>
                         </ul>
@@ -113,6 +115,7 @@ export default {
     .logo {
         filter: brightness(0) invert(1);
         width: 120px;
+        
     }
 
     .my-dropdown {
@@ -127,6 +130,10 @@ export default {
         a {
             color: black;
         }
+    }
+    // Nuova classe per rendere visibile il logo su dispositivi mobili
+    .logo-mobile-visible {
+        display: flex !important;
     }
 }
 </style>
