@@ -37,8 +37,6 @@ export default {
         getApartment() {
             axios.get(`${this.store.endpoint}/api/apartment/${this.$route.params.slug}`).then((response) => {
                 this.apartment = response.data.apartment;
-                console.log(this.apartment);
-                console.log(this.apartment.longitude, this.apartment.latitude);
 
                 if (this.apartment == null) {
                     this.$router.push({

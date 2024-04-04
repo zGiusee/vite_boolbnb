@@ -22,7 +22,9 @@ export default {
             store,
             apartments: [],
             ttSearchBox: null,
+            apartment_id: null,
             query: ' ',
+            ip: null,
             currentPage: 1,
             lastPage: null,
         }
@@ -78,7 +80,7 @@ export default {
 
                 this.$router.push({ name: 'search', params: { query: this.query } });
             }
-        }
+        },
     },
 }
 </script>
