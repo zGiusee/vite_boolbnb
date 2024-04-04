@@ -146,12 +146,10 @@ export default {
 
                 <div class="col-12">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="">
                             <img :src="getImage()" class="img-size">
                         </div>
-                        <div class="col-6">
-                            <!-- <img :src="getImage()" class="img-size"> -->
-                        </div>
+                        
                     </div>
                 </div>
 
@@ -327,4 +325,13 @@ export default {
 .w-75 {
     width: 75%;
 }
+
+@media screen and (max-width: 600px) {
+    .img-size {
+        height: 50vh;
+        width: 100%;
+    }
+}
+
+
 </style>
