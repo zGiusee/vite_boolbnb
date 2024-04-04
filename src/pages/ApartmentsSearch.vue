@@ -28,6 +28,9 @@ export default {
             error: '',
         }
     },
+    mounted() {
+
+    },
     created() {
         this.getApartments();
         this.getServices();

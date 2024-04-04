@@ -99,6 +99,7 @@ export default {
                 <router-link class="search-button ms-2"
                     :to="{ name: 'search', params: { query: query } }">Search</router-link>
             </div>
+
         </div>
 
         <!-- CARD CICLATE  -->
