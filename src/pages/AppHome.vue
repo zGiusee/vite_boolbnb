@@ -128,9 +128,10 @@ export default {
         </div>
 
         <!-- CARD CICLATE  -->
-        <div class="row column-gap-1 justify-content-around mt-5 justify-content-center">
+        <div class="row mt-5">
             <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
         </div>
+
     </div>
 
     <!-- TASTI NAVIGAZIONE PAGINE  -->
@@ -152,5 +153,10 @@ export default {
     .popular-subtitle {
         font-size: 20px;
     }
+}
+
+.prova {
+    background-color: red;
+    height: 100px;
 }
 </style>

@@ -278,7 +278,7 @@ export default {
                 {{ error }}
             </div>
         </div>
-        <div v-else class="row column-gap-5 mt-5">
+        <div v-else class="row mt-5">
             <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
         </div>
     </div>

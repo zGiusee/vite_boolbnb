@@ -20,8 +20,8 @@ export default {
                 </div>
 
                 <!-- JUMBOTRON PER MOBILE  -->
-                <div class="col-12 d-sm-none">
-                    <div class="home-title-mobile">
+                <div class="col-12 mt-4 d-sm-none">
+                    <div class="mt-5 home-title-mobile">
                         Find your next stay
                         <div class="home-subtitle-mobile my-3">
                             Discover the Advantages of Low-prices on Houses, B&B and much more...
