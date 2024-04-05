@@ -30,7 +30,7 @@ export default {
 <template lang="">
     <header class="my-header">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-between">
 
                 <!-- LOGO  -->
                 <div class="col-4 align-items-center d-flex d-sm-none logo-mobile-visible">
@@ -42,7 +42,7 @@ export default {
                 </div>
 
                 <!-- NAV LINKS  -->
-                <div class="col-4 col-sm-4 d-flex align-items-center justify-content-center">
+                <div class="col-4 col-sm-4 d-none d-lg-flex align-items-center justify-content-center">
                     <ul class="menu p-0">
                         <router-link :to="{ name: 'home' }" class="dropdown-item">Home</router-link>
                     </ul>
@@ -58,10 +58,8 @@ export default {
                     </button>
                 </div>
 
-                <!-- BOTTONI (MOBILE & TABLET) -->
-                
+                <!-- BOTTONI (MOBILE & TABLET) -->             
                 <div class="col-4 col-sm-4 text-end align-self-center d-lg-none">
-
                     <div class="btn-group my-dropdown">
                         <button type="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-list"></i>
