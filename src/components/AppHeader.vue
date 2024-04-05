@@ -44,7 +44,7 @@ export default {
                 <!-- NAV LINKS  -->
                 <div class="col-4 col-sm-4 d-flex align-items-center justify-content-center">
                     <ul class="menu p-0">
-
+                        <router-link :to="{ name: 'home' }" class="dropdown-item">Home</router-link>
                     </ul>
                 </div>
 
@@ -115,7 +115,7 @@ export default {
     .logo {
         filter: brightness(0) invert(1);
         width: 120px;
-        
+
     }
 
     .my-dropdown {
@@ -131,6 +131,7 @@ export default {
             color: black;
         }
     }
+
     // Nuova classe per rendere visibile il logo su dispositivi mobili
     .logo-mobile-visible {
         display: flex !important;
