@@ -12,9 +12,6 @@ export default {
     props: {
         apartment: Object,
     },
-    mounted() {
-        const config = { headers: { 'Access-Control-Allow-Origin': '*' } };
-    },
     methods: {
         getImage() {
             let image;
@@ -37,7 +34,7 @@ export default {
         },
         getView(id) {
 
-            let ip = '';
+            let ip = null;
 
             // Prima chiamata per recuperare l'ip dell'utente e creare l'oggetto che passeremo al BE
             axios.get(`${this.store.endpoint}/api/getIP`).then((response) => {
@@ -67,11 +64,9 @@ export default {
                     })
                 }
 
-
             }).catch(error => {
                 console.error(error);
             })
-
 
         }
 
@@ -80,35 +75,55 @@ export default {
 </script>
 
 <template>
-    <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xxl-3 mb-5 p-3">
-        <form @submit.prevent="getView(apartment.id)" method="post">
-            <div class="mc-card">
-                <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">
-                    <div class="p-0">
-                        <img :src="getImage()">
-                    </div>
-                    <div class="label">
-                        <i class="bi bi-house-check-fill"></i> Avaible
-                    </div>
-                    <div class="card-tit px-2 pt-3">
-                        <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">{{
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3 mb-5 p-3">
+
+        <div class="mc-card">
+            <router-link @click="getView(apartment.id)"
+                :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">
+                <div class="p-0">
+                    <img :src="getImage()">
+                </div>
+                <div class="label">
+                    <i class="bi bi-house-check-fill"></i> Avaible
+                </div>
+                <div class="card-tit px-2 py-3">
+                    <router-link @click="getView(apartment.id)"
+                        :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">{{
                             apartment.title
                         }}</router-link>
-                    </div>
-                    <div class="address px-2 pb-3">
-                        <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
-                    </div>
-                </router-link>
-            </div>
-            <button type="submit"> ssss</button>
-        </form>
+                </div>
+                <div class="address px-2 pb-3">
+                    <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
+                </div>
+                <div class="address px-2 pb-3">
+                    <i class="bi bi bi-arrows-angle-expand pe-2"></i> Square meters: {{ apartment.square_meters }}m²
+                </div>
+
+                <!-- PC/TELEFONO -->
+                <div class="address px-2 pb-5 d-sm-none d-lg-block ">
+                    <i class="fa-solid fa-door-open pe-2"></i>Rooms: {{ apartment.rooms }}
+                    <i class="fa-solid fa-bed px-1 px-xl-2 ps-xl-2 "></i>Beds: {{ apartment.beds }}
+                    <i class="fas fa-sink ps-1 pe-1 ps-xl-2"></i>Bathrooms: {{ apartment.bathrooms }}
+                </div>
+
+                <!-- TABLET -->
+                <div class="address px-2 pb-3 d-none d-sm-block d-lg-none">
+                    <i class="fa-solid fa-door-open pe-2"></i>Rooms: {{ apartment.rooms }}
+                </div>
+                <div class="address px-2 pb-3 d-none d-sm-block d-lg-none">
+                    <i class="fa-solid fa-bed  pe-2"></i>Beds: {{ apartment.beds }}
+                </div>
+                <div class="address px-2 pb-3 d-none d-sm-block d-lg-none">
+                    <i class="fa-solid fa-sink pe-2"></i>Bathrooms: {{ apartment.bathrooms }}
+                </div>
+            </router-link>
+        </div>
+
     </div>
 
 </template>
 
 <style scoped lang="scss">
-@use '../styles/generals.scss' as *;
-
 .mc-card {
     border-radius: 8px;
     box-shadow: 0px 2px 10px 2px #c2c2c2;
