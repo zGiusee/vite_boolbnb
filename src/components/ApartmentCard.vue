@@ -5,7 +5,7 @@ export default {
     data() {
         return {
             store,
-            ip: null,
+            data: null,
             apartment_id: null,
         }
     },
@@ -35,42 +35,45 @@ export default {
 
             return `${this.store.endpoint}${image} `
         },
-        async getPublicIP() {
-            try {
-                const response = await axios.get('https://ipinfo.io/json?token=00bf33d0a6bd49');
-                this.ip = response.data.ip;
-            } catch (error) {
+        getView(id) {
+
+            let ip = '';
+
+            // Prima chiamata per recuperare l'ip dell'utente e creare l'oggetto che passeremo al BE
+            axios.get(`${this.store.endpoint}/api/getIP`).then((response) => {
+                // Utilizza la risposta ottenuta dal server
+                ip = response.data.result;
+
+                if (ip != null) {
+                    // Definisco i dati che verranno passati al BE
+                    this.data = {
+                        ip: ip,
+                        apartment_id: id,
+                        date: new Date().toISOString().substring(0, 10),
+                    }
+
+                    // Faccio la chiamata passando i dati al BE e salvando il record nel Database
+                    axios.post(`${this.store.endpoint}/api/view`, this.data).then((response) => {
+
+                        if (response.data.success) {
+                            this.data = null;
+
+                        } else {
+                            this.errors = response.data.errors
+                        }
+
+                    }).catch(error => {
+                        console.error(error);
+                    })
+                }
+
+
+            }).catch(error => {
                 console.error(error);
-            }
-        },
-        // getView(id) {
-
-        //     // Utilizza la risposta ottenuta dal server
-        //     this.ip = this.getPublicIP();
-
-        //     // Definisco i dati che verranno passati al BE
-        //     const data = {
-        //         ip: this.ip,
-        //         apartment_id: id,
-        //         date: new Date().toISOString().substring(0, 10),
-        //     }
-
-        //     // Faccio la chiamata passando i dati
-        //     axios.post(`${this.store.endpoint}/api/view`, data).then((response) => {
-
-        //         if (response.data.success) {
-        //             this.ip = '';
-        //             this.apartment_id = '';
-        //             this.date = '';
-
-        //         } else {
-        //             this.errors = response.data.errors
-        //         }
-
-        //     })
+            })
 
 
-        // }
+        }
 
     },
 }
@@ -78,23 +81,27 @@ export default {
 
 <template>
     <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xxl-3 mb-5 p-3">
-        <div class="mc-card">
-            <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">
-                <div class="p-0">
-                    <img :src="getImage()">
-                </div>
-                <div class="label">
-                    <i class="bi bi-house-check-fill"></i> Avaible
-                </div>
-                <div class="card-tit px-2 pt-3">
-                    <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">{{ apartment.title
+        <form @submit.prevent="getView(apartment.id)" method="post">
+            <div class="mc-card">
+                <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">
+                    <div class="p-0">
+                        <img :src="getImage()">
+                    </div>
+                    <div class="label">
+                        <i class="bi bi-house-check-fill"></i> Avaible
+                    </div>
+                    <div class="card-tit px-2 pt-3">
+                        <router-link :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">{{
+                            apartment.title
                         }}</router-link>
-                </div>
-                <div class="address px-2 pb-3">
-                    <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
-                </div>
-            </router-link>
-        </div>
+                    </div>
+                    <div class="address px-2 pb-3">
+                        <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
+                    </div>
+                </router-link>
+            </div>
+            <button type="submit"> ssss</button>
+        </form>
     </div>
 
 </template>
