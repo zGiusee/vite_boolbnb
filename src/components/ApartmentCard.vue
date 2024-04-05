@@ -80,33 +80,42 @@ export default {
         <div class="mc-card">
             <router-link @click="getView(apartment.id)"
                 :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">
+                <!-- APARTMENT IMAGE -->
                 <div class="p-0">
                     <img :src="getImage()">
                 </div>
+
+                <!-- LABEL -->
                 <div class="label">
                     <i class="bi bi-house-check-fill"></i> Avaible
                 </div>
+
+                <!-- APARTMENT TITLE -->
                 <div class="card-tit px-2 py-3">
                     <router-link @click="getView(apartment.id)"
                         :to="{ name: 'apartment_detail', params: { slug: apartment.slug } }">{{
                             apartment.title
                         }}</router-link>
                 </div>
+
+                <!-- APARTMENT ADDRESS -->
                 <div class="address px-2 pb-3">
                     <i class="bi bi-geo-alt-fill pe-2"></i> {{ apartment.address }}
                 </div>
+
+                <!-- APARTMENT SQ -->
                 <div class="address px-2 pb-3">
                     <i class="bi bi bi-arrows-angle-expand pe-2"></i> Square meters: {{ apartment.square_meters }}m²
                 </div>
 
-                <!-- PC/TELEFONO -->
+                <!-- BASIC INFORMATIONS PC/TELEFONO -->
                 <div class="address px-2 pb-5 d-sm-none d-lg-block ">
                     <i class="fa-solid fa-door-open pe-2"></i>Rooms: {{ apartment.rooms }}
                     <i class="fa-solid fa-bed px-1 px-xl-2 ps-xl-2 "></i>Beds: {{ apartment.beds }}
                     <i class="fas fa-sink ps-1 pe-1 ps-xl-2"></i>Bathrooms: {{ apartment.bathrooms }}
                 </div>
 
-                <!-- TABLET -->
+                <!-- BASIC INFORMATIONS TABLET -->
                 <div class="address px-2 pb-3 d-none d-sm-block d-lg-none">
                     <i class="fa-solid fa-door-open pe-2"></i>Rooms: {{ apartment.rooms }}
                 </div>
@@ -118,9 +127,7 @@ export default {
                 </div>
             </router-link>
         </div>
-
     </div>
-
 </template>
 
 <style scoped lang="scss">
