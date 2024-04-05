@@ -204,7 +204,13 @@ export default {
             <div class="col-6 col-md-3 mt-4 d-flex justify-content-center align-items-end">
                 <div>
                     <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
-                    <select name="radius" v-model="radius" id="radius">
+                    <span class="my-font-sm">({{ this.radius }}km)</span>
+                    <div class="radius_container">
+                        <input type="range" v-model="radius" id="radius" name="radius" min="1" max="100" default="20" />
+
+                    </div>
+
+                    <!-- <select name="radius" v-model="radius" id="radius">
                         <option value="1">1 km</option>
                         <option value="2">2 km</option>
                         <option value="3">3 km</option>
@@ -212,7 +218,7 @@ export default {
                         <option value="5">5 km</option>
                         <option value="10">10 km</option>
                         <option value="20" selected>20 km</option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
 
@@ -288,6 +294,28 @@ export default {
 <style scoped lang="scss">
 @use '../styles/generals.scss' as *;
 
+.radius_container input[type="range"] {
+    -webkit-appearance: none;
+    background-color: $my_lightblue;
+    border-radius: 15px;
+    height: 10px;
+
+}
+
+.radius_container input[type="range"]::-moz-range-track {
+    background-color: rgb(202, 202, 202);
+    border-radius: 15px;
+    height: 10px;
+}
+
+
+.radius_container input[type="range"]::-moz-range-progress {
+    border-radius: 15px;
+    height: 10px;
+    background-color: $my_lightblue;
+
+}
+
 .error {
     font-size: 26px;
     padding: 70px 0px;
@@ -305,6 +333,10 @@ export default {
 .my-counter-disabled {
     color: rgb(202, 202, 202);
     cursor: default;
+}
+
+.my-font-sm {
+    font-size: 13px;
 }
 
 .search-container {
