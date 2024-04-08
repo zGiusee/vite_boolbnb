@@ -209,16 +209,6 @@ export default {
                         <input type="range" v-model="radius" id="radius" name="radius" min="1" max="100" default="20" />
 
                     </div>
-
-                    <!-- <select name="radius" v-model="radius" id="radius">
-                        <option value="1">1 km</option>
-                        <option value="2">2 km</option>
-                        <option value="3">3 km</option>
-                        <option value="4">4 km</option>
-                        <option value="5">5 km</option>
-                        <option value="10">10 km</option>
-                        <option value="20" selected>20 km</option>
-                    </select> -->
                 </div>
             </div>
 
