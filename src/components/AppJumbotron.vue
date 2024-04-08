@@ -38,7 +38,7 @@ export default {
 
 .my-jumbotron {
     width: 100%;
-    height: 480px;
+    height: 400px;
     background: linear-gradient(to bottom, $my_lightblue, white);
     position: relative;
 

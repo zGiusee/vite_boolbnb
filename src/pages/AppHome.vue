@@ -59,12 +59,12 @@ export default {
     },
     methods: {
         getApartment(page_number) {
-            axios.get(`${this.store.endpoint}/api/apartments`, {
+            axios.get(`${this.store.endpoint}/api/sponsorized/apartments`, {
                 params: {
                     page: page_number
                 }
             }).then((response) => {
-                this.apartments = response.data.results.data.filter(apartment => apartment.visible);
+                this.apartments = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             })
@@ -91,16 +91,36 @@ export default {
     <div class="container">
         <div class="row">
             <div class="col-12 text-center my-4">
+
+                <div class="row justify-content-center text-center mb-5">
+                    <div class="popular-title mb-3">
+                        Search your destination
+                        <div class="popular-subtitle">
+                            Find the perfect available apartment for your trip
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex d-flex justify-content-center">
+
+                        <!-- Input di TomTom -->
+                        <div id="myInput"></div>
+                    </div>
+                    <div class="col-12 d-flex d-flex justify-content-center mt-3">
+                        <button type="button" @click="valueAndSearch" class="search-button">Search</button>
+                    </div>
+
+                </div>
+                        <!-- SEARCHBAR  -->
+
                 <div class="popular-title">
-                    Most popular houses
+                    <h2>Most popular houses</h2>
                     <div class="popular-subtitle">
-                        choose the right apartment, house or B&B to satisfy your person
+                        <p><i>choose the right apartment, house or B&B to satisfy your person</i></p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-12">
-                qui verranno visualizzate le card degli appartamenti in evidenza!
+            <div class="row mt-5">
+                <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
             </div>
         </div>
     </div>
@@ -108,28 +128,10 @@ export default {
     <!-- SEARCH AND CARD SECTION  -->
     <div class="container my-5">
 
-        <!-- SEARCHBAR  -->
-        <div class="row justify-content-center text-center">
-            <div class="popular-title mb-3">
-                Search your destination
-                <div class="popular-subtitle">
-                    Find the perfect available apartment for your trip
-                </div>
-            </div>
-            <div class="col-12 d-flex d-flex justify-content-center">
-
-                <!-- Input di TomTom -->
-                <div id="myInput"></div>
-            </div>
-            <div class="col-12 d-flex d-flex justify-content-center mt-3">
-                <button type="button" @click="valueAndSearch" class="search-button">Search</button>
-            </div>
-
-        </div>
 
         <!-- CARD CICLATE  -->
         <div class="row mt-5">
-            <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
+            <!-- <ApartmentCard v-for="apartment in apartments" :apartment="apartment" /> -->
         </div>
 
     </div>
