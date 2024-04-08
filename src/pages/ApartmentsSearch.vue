@@ -170,41 +170,57 @@ export default {
                 </div>
             </div>
 
-            <!-- ADRESS INPUT -->
-            <div class="col-12 col-md-7 d-flex justify-content-end mt-4 search-container">
-
-                <label for="query" class="d-flex align-items-center ">Address</label>
-                <div id="myInput"></div>
+            <div class="col-12 col-md-12 d-flex justify-content-center mt-4 search-container">
+               <p><i>{{ query }}</i></p>
             </div>
 
-
-            <!-- Services INPUT -->
-            <div class="col-12 col-md-5 pt-3 d-flex justify-content-center justify-content-md-start align-items-end ">
-                <div>
-                    <div class=" dropend mx-1">
-                        <button type="button" class="search-button down-toggle" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Services
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="px-3">
-                                <div class="form-check-inline check_service" v-for="service in services"
-                                    :key="service.id">
-                                    <input type="checkbox" class="form-check-input" :value="service.id"
-                                        v-model="selectedServices">
-                                    <label class="form-check-label">{{ service.name }}</label><br>
-                                </div>
-                            </li>
-                        </ul>
+            <!-- ADRESS INPUT -->
+            <div class="col-12 col-md-12 d-flex justify-content-center mt-1 search-container">
+                
+                <!-- Services INPUT -->
+                <div class=" d-flex justify-content-center justify-content-md-center align-items-end ">
+                    <div>
+                        <div class=" dropdown-center mx-1">
+                            <button type="button" class="search-button dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Services
+                            </button>
+                            <ul class="dropdown-menu py-1">
+                                <li class="check_box">
+                                    <div class="form-check-inline dropdown-item check_service" v-for="service in services"
+                                        :key="service.id">
+                                        <input type="checkbox" class="form-check-input my-0" :value="service.id"
+                                            v-model="selectedServices">
+                                        <label class="form-check-label px-2">{{ service.name }}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- RADIUS SLECET INPUT -->
-            <div class="col-6 col-md-3 mt-4 d-flex justify-content-center align-items-end">
-                <div>
-                    <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
-                    <select name="radius" v-model="radius" id="radius">
+                <div id="myInput"></div>
+
+                <div class=" d-flex justify-content-center justify-content-md-center align-items-end ">
+                    <button type="button" class="search-button mx-1"
+                        @click="getApartmentsRefresh(beds, rooms, radius, bathrooms)">Search
+                    </button>
+                </div>
+            
+                
+            </div>
+            
+
+
+            
+
+            <!-- INPUT -->
+            <div class="col-6 col-md-12 mt-4 d-flex justify-content-center ">
+                <div class="mx-4">
+                    <div>
+                        <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
+                    </div>
+                    <select name="radius" v-model="radius" id="radius" class="filter">
                         <option value="1">1 km</option>
                         <option value="2">2 km</option>
                         <option value="3">3 km</option>
@@ -214,12 +230,12 @@ export default {
                         <option value="20" selected>20 km</option>
                     </select>
                 </div>
-            </div>
 
-            <!-- BEDS INPUT -->
-            <div class="col-6 col-md-3 mt-4 d-flex justify-content-center ">
+
                 <div class="counter">
-                    <label for="Beds" class=" d-block d-lg-inline-block ">Beds</label>
+                    <div>
+                        <label for="Beds" class=" d-block d-lg-inline-block ">Beds</label>
+                    </div>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="bedsDecrement"><span
                                 :class="beds == 1 ? 'my-counter-disabled' : ''">-</span></button>
@@ -228,12 +244,12 @@ export default {
                                 :class="beds == 99 ? 'my-counter-disabled' : ''">+</span></button>
                     </div>
                 </div>
-            </div>
 
-            <!-- ROOMS INPUT -->
-            <div class="col-6 col-md-3 mt-4 d-flex justify-content-center  ">
-                <div class="counter">
-                    <label for="rooms" class=" d-block d-lg-inline-block ">Rooms</label>
+
+                <div class="counter mx-4">
+                    <div>
+                        <label for="rooms" class=" d-block d-lg-inline-block ">Rooms</label>
+                    </div>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="roomsDecrement"><span
                                 :class="rooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
@@ -243,12 +259,12 @@ export default {
                                 :class="rooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
                     </div>
                 </div>
-            </div>
 
-            <!-- BATHROOMS INPUT -->
-            <div class="col-6 col-md-3 mt-4 d-flex justify-content-center ">
+                
                 <div class="counter">
-                    <label for="bathrooms" class=" d-block d-lg-inline-block ">Bathrooms</label>
+                    <div>
+                        <label for="bathrooms" class=" d-block d-lg-inline-block ">Bathrooms</label>
+                    </div>
                     <div class="d-inline-block input-container">
                         <button type="button" @click="bathroomsDecrement"><span
                                 :class="bathrooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
@@ -258,19 +274,13 @@ export default {
                                 :class="bathrooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
                     </div>
                 </div>
+
             </div>
 
 
+            
         </div>
 
-        <!-- ADRESS BUTTON -->
-        <div class="col-12 d-flex justify-content-center mt-4">
-            <div>
-                <button type="button" class="search-button"
-                    @click="getApartmentsRefresh(beds, rooms, radius, bathrooms)">Search
-                </button>
-            </div>
-        </div>
 
         <!-- CARD CICLATE  -->
         <div v-if="apartments == null || apartments.length === 0">
@@ -318,16 +328,16 @@ export default {
     .search-container {
 
         input {
-            width: 100%;
-            padding: 5px 10px;
+            padding: 10px 10px;
             border: 1px solid $my_lightblue;
 
             &:focus {
                 outline: none;
             }
         }
-
+        
     }
+
 
     // STILE PER LA SELECT 
     select {
@@ -340,12 +350,15 @@ export default {
     .counter {
         .input-container {
             border: 1px solid $my_lightblue;
-            padding: 7px 14px;
+            padding: 5px 15px;
+            border-radius: 10px;
+            background-color: $my_lightblue;
+            color: white;
 
             button {
                 border: none;
-                background-color: transparent;
-                color: $my_lightblue;
+                background-color: $my_lightblue;
+                color: white;
                 cursor: pointer;
                 font-size: 20px;
             }
@@ -354,8 +367,10 @@ export default {
         input {
             width: 23px;
             border: 0;
-            margin-left: 10px;
-            margin-right: 4px;
+            margin: 0px 10px;
+            background-color: $my_lightblue;
+            color: white;
+            text-align: center;
 
             &:focus {
                 outline: none;
@@ -364,5 +379,18 @@ export default {
     }
 
     // STILE BOTTONE
+    .check_service{
+        width: 100%;
+    }
+    .check_box{
+        width: 300px;
+    }
+    .filter{
+        border-radius: 10px;
+        padding: 5px 13px;
+        background-color: $my_lightblue;
+        color: white;
+        height: 41px;
+    }
 }
 </style>
