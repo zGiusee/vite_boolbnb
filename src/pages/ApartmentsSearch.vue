@@ -199,7 +199,7 @@ export default {
                     </div>
                 </div>
 
-                <div id="myInput"></div>
+                <div class="mx-3" id="myInput"></div>
 
                 <div class=" d-flex justify-content-center justify-content-md-center align-items-end ">
                     <button type="button" class="search-button mx-1"
@@ -217,18 +217,12 @@ export default {
             <!-- INPUT -->
             <div class="col-6 col-md-12 mt-4 d-flex justify-content-center ">
                 <div class="mx-4">
-                    <div>
-                        <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
+                    <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
+                    <span class="my-font-sm">({{ this.radius }}km)</span>
+                    <div class="radius_container">
+                        <input type="range" v-model="radius" id="radius" name="radius" min="1" max="100" default="20" />
+
                     </div>
-                    <select name="radius" v-model="radius" id="radius" class="filter">
-                        <option value="1">1 km</option>
-                        <option value="2">2 km</option>
-                        <option value="3">3 km</option>
-                        <option value="4">4 km</option>
-                        <option value="5">5 km</option>
-                        <option value="10">10 km</option>
-                        <option value="20" selected>20 km</option>
-                    </select>
                 </div>
 
 
@@ -280,7 +274,6 @@ export default {
 
 
         </div>
-
 
         <!-- CARD CICLATE  -->
         <div v-if="apartments == null || apartments.length === 0">

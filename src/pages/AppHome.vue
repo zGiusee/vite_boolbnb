@@ -64,7 +64,7 @@ export default {
                     page: page_number
                 }
             }).then((response) => {
-                this.apartments = response.data.results.data;
+                this.apartments = response.data.results.data.filter(apartment => apartment.visible);
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             })
@@ -120,12 +120,9 @@ export default {
 
                 <!-- Input di TomTom -->
                 <div id="myInput"></div>
-
-                <div class=" d-flex justify-content-center justify-content-md-center align-items-end ">
-                    <button type="button" class="search-button mx-1"
-                        @click="getApartmentsRefresh(beds, rooms, radius, bathrooms)">Search
-                    </button>
-                </div>
+            </div>
+            <div class="col-12 d-flex d-flex justify-content-center mt-3">
+                <button type="button" @click="valueAndSearch" class="search-button">Search</button>
             </div>
 
         </div>
