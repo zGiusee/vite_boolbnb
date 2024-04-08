@@ -109,7 +109,7 @@ export default {
                     </div>
 
                 </div>
-                        <!-- SEARCHBAR  -->
+                <!-- SEARCHBAR  -->
 
                 <div class="popular-title">
                     <h2>Most popular houses</h2>
@@ -123,17 +123,6 @@ export default {
                 <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
             </div>
         </div>
-    </div>
-
-    <!-- SEARCH AND CARD SECTION  -->
-    <div class="container my-5">
-
-
-        <!-- CARD CICLATE  -->
-        <div class="row mt-5">
-            <!-- <ApartmentCard v-for="apartment in apartments" :apartment="apartment" /> -->
-        </div>
-
     </div>
 
     <!-- TASTI NAVIGAZIONE PAGINE  -->

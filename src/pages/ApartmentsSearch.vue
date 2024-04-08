@@ -31,6 +31,7 @@ export default {
         }
     },
     mounted() {
+        this.query = this.$route.params.query;
         var options = {
             searchOptions: {
                 key: this.store.apiKey,
