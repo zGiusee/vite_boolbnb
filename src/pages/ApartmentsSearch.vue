@@ -295,7 +295,7 @@ export default {
 @use '../styles/generals.scss' as *;
 
 .radius_container input[type="range"] {
-    -webkit-appearance: none;
+    appearance: none;
     background-color: $my_lightblue;
     border-radius: 15px;
     height: 10px;
