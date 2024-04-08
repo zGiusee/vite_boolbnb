@@ -71,7 +71,7 @@ export default {
 
 
                 <!-- LISTE  -->
-                <div class="col-12 col-sm-8 d-flex flex-wrap my-5">
+                <div class="col-12 text-center text-sm-start col-sm-8 d-flex flex-wrap my-5">
 
                     <!-- NAVIGATION  -->
                     <div class="col-12 col-sm-4">
@@ -145,8 +145,8 @@ export default {
 
     .footer-title {
         color: $my_bluetwo;
+        padding: 0px 0px 20px 0px;
         font-size: 20px;
-        padding-bottom: 10px;
     }
 
     .footer-list {
