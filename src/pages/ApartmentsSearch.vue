@@ -18,6 +18,7 @@ export default {
     data() {
         return {
             store,
+            search: 0,
             query: '',
             beds: 1,
             rooms: 1,
@@ -28,6 +29,8 @@ export default {
             ttSearchBox: null,
             selectedServices: [],
             error: '',
+            currentPage: 1,
+            lastPage: null,
         }
     },
     mounted() {
@@ -69,10 +72,17 @@ export default {
                 this.services = null;
             })
         },
-        getApartments() {
-            axios.get(`${this.store.endpoint}/api/search/?query=${this.$route.params.query}&radius=20`).then((response) => {
+        getApartments(page_number) {
+            axios.get(`${this.store.endpoint}/api/search/?query=${this.$route.params.query}&radius=20`, {
+                params: {
+                    page: page_number
+                }
+            }).then((response) => {
 
-                this.apartments = response.data.results;
+                this.apartments = response.data.results.data;
+
+                this.currentPage = response.data.results.current_page;
+                this.lastPage = response.data.results.last_page;
 
             }).catch((error) => {
                 this.apartments = null;
@@ -80,8 +90,11 @@ export default {
             })
 
         },
-        getApartmentsRefresh(beds, rooms, radius, bathrooms) {
+        getApartmentsRefresh(beds, rooms, radius, bathrooms, page_number) {
 
+            // Variabile che mi permette di capire se è stata effettuata una ricerca o no
+            // Che poi mi servira per cambiare i bottoni
+            this.search = 1;
 
             let value = this.ttSearchBox.getValue();
             // Applico il valore alla nostra input
@@ -100,12 +113,19 @@ export default {
                 servicesIds = `&services=${this.selectedServices.join(',')}`;
             }
 
-            axios.get(`${this.store.endpoint}/api/search/?query=${this.query}${radius}${beds}${rooms}${bathrooms}${servicesIds}`).then((response) => {
+            axios.get(`${this.store.endpoint}/api/search/?query=${this.query}${radius}${beds}${rooms}${bathrooms}${servicesIds}`, {
+                params: {
+                    page: page_number
+                }
+            }).then((response) => {
+
                 // Rimuovo i vecchi appartamenti
                 this.apartments = null;
 
                 // Recupero quelli nuovi filtrando per la visibilità
-                this.apartments = response.data.results.filter(apartment => apartment.visible);
+                this.apartments = response.data.results.data;
+                this.currentPage = response.data.results.current_page;
+                this.lastPage = response.data.results.last_page;
 
                 // Aggiorno la url della pagina
                 window.history.pushState({}, '', this.query + radius + beds + rooms + bathrooms + servicesIds)
@@ -286,6 +306,23 @@ export default {
             <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
         </div>
     </div>
+
+    <!-- TASTI NAVIGAZIONE PAGINE  -->
+    <div v-if="this.search == 1" class="container text-center mb-5">
+        <button :class="currentPage == 1 ? 'my-disabled' : ''"
+            @click=" getApartmentsRefresh(beds, rooms, radius, bathrooms, currentPage - 1)" class="nav-button me-2"><i
+                class="bi bi-chevron-left" :disabled="currentPage == 1"></i></button>
+        <button :class="currentPage == lastPage ? 'my-disabled' : ''"
+            @click="getApartmentsRefresh(beds, rooms, radius, bathrooms, currentPage + 1)" class="nav-button"
+            :disabled="currentPage == lastPage"><i class="bi bi-chevron-right"></i></button>
+    </div>
+    <div v-else class="container text-center mb-5">
+        <button :class="currentPage == 1 ? 'my-disabled' : ''" @click=" getApartments(currentPage - 1)"
+            class="nav-button me-2"><i class="bi bi-chevron-left" :disabled="currentPage == 1"></i></button>
+        <button :class="currentPage == lastPage ? 'my-disabled' : ''" @click="getApartments(currentPage + 1)"
+            class="nav-button" :disabled="currentPage == lastPage"><i class="bi bi-chevron-right"></i></button>
+    </div>
+
 
     <AppFooter />
 </template>
