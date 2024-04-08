@@ -64,7 +64,7 @@ export default {
                     page: page_number
                 }
             }).then((response) => {
-                this.apartments = response.data.results.data.filter(apartment => apartment.visible);
+                this.apartments = response.data.results.data;
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
             })
