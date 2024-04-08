@@ -88,7 +88,6 @@ export default {
                 this.apartments = null;
                 this.error = 'There are no apartments matching the entered parameters.'
             })
-
         },
         getApartmentsRefresh(beds, rooms, radius, bathrooms, page_number) {
 
@@ -99,7 +98,6 @@ export default {
             let value = this.ttSearchBox.getValue();
             // Applico il valore alla nostra input
             this.query = value;
-
 
             // Definisco i valori e gli applico la sintassi per la chiamata API
             beds = `&beds=${beds}`;
@@ -310,17 +308,24 @@ export default {
     <!-- TASTI NAVIGAZIONE PAGINE  -->
     <div v-if="this.search == 1" class="container text-center mb-5">
         <button :class="currentPage == 1 ? 'my-disabled' : ''"
-            @click=" getApartmentsRefresh(beds, rooms, radius, bathrooms, currentPage - 1)" class="nav-button me-2"><i
-                class="bi bi-chevron-left" :disabled="currentPage == 1"></i></button>
+            @click=" getApartmentsRefresh(beds, rooms, radius, bathrooms, currentPage - 1)" class="nav-button me-2">
+            <i class="bi bi-chevron-left" :disabled="currentPage == 1"></i>
+        </button>
         <button :class="currentPage == lastPage ? 'my-disabled' : ''"
             @click="getApartmentsRefresh(beds, rooms, radius, bathrooms, currentPage + 1)" class="nav-button"
-            :disabled="currentPage == lastPage"><i class="bi bi-chevron-right"></i></button>
+            :disabled="currentPage == lastPage">
+            <i class="bi bi-chevron-right"></i>
+        </button>
     </div>
     <div v-else class="container text-center mb-5">
         <button :class="currentPage == 1 ? 'my-disabled' : ''" @click=" getApartments(currentPage - 1)"
-            class="nav-button me-2"><i class="bi bi-chevron-left" :disabled="currentPage == 1"></i></button>
+            class="nav-button me-2">
+            <i class="bi bi-chevron-left" :disabled="currentPage == 1"></i>
+        </button>
         <button :class="currentPage == lastPage ? 'my-disabled' : ''" @click="getApartments(currentPage + 1)"
-            class="nav-button" :disabled="currentPage == lastPage"><i class="bi bi-chevron-right"></i></button>
+            class="nav-button" :disabled="currentPage == lastPage">
+            <i class="bi bi-chevron-right"></i>
+        </button>
     </div>
 
 
