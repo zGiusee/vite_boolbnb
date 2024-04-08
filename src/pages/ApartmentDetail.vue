@@ -111,6 +111,12 @@ export default {
             }
             if (!this.email) {
                 this.errors.email = 'The email is required!';
+            } else {
+                // controllo se l'email è valida utilizzando la stessa espressione regolare dell'html
+                const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!validEmail.test(this.email)) {
+                    this.errors.email = 'Please enter a valid email address!';
+                }
             }
             if (!this.description) {
                 this.errors.description = 'The message is required!';
@@ -147,7 +153,7 @@ export default {
                         <div class="">
                             <img :src="getImage()" class="img-size">
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -269,8 +275,8 @@ export default {
                         <!-- EMAIL  -->
                         <div class="col-6 mb-3">
                             <label for="name" class="form-label"><i>Email</i></label>
-                            <input type="text" v-model="email" class="form-control" placeholder="Email" name="email"
-                                id="email" required>
+                            <input type="email" v-model="email" class="form-control" placeholder="Email" name="email"
+                                id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
                             <p v-if="errors.email" class="text-danger">{{ errors.email }}</p>
                         </div>
                         <!-- MESSAGE  -->
@@ -330,6 +336,4 @@ export default {
         width: 100%;
     }
 }
-
-
 </style>
