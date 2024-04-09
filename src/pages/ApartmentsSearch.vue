@@ -20,6 +20,7 @@ export default {
             store,
             search: 0,
             query: '',
+            queryVanilla: '',
             beds: 1,
             rooms: 1,
             radius: 20,
@@ -79,6 +80,7 @@ export default {
                 }
             }).then((response) => {
 
+                this.queryVanilla = this.$route.params.query;
                 this.apartments = response.data.results.data;
 
                 this.currentPage = response.data.results.current_page;
@@ -103,6 +105,7 @@ export default {
             let value = this.ttSearchBox.getValue();
             // Applico il valore alla nostra input
             this.query = value;
+            this.queryVanilla = value;
 
             // Definisco i valori e gli applico la sintassi per la chiamata API
             beds = `&beds=${beds}`;
@@ -194,13 +197,13 @@ export default {
                 </div>
             </div>
 
-            <div class="col-12 col-md-12 d-flex justify-content-center mt-4 search-container">
-                <p><i>{{ query }}</i></p>
+
+            <div class="col-12 col-md-8 my-2">
+                <div class="mx-3" id="myInput"></div>
             </div>
 
             <!-- ADRESS INPUT -->
-            <div class="col-12 col-md-12 d-flex justify-content-center mt-1 search-container">
-
+            <div class="col-12 col-md-4 d-flex justify-content-center my-2 search-container">
                 <!-- Services INPUT -->
                 <div class=" d-flex justify-content-center justify-content-md-center align-items-end ">
                     <div>
@@ -219,49 +222,39 @@ export default {
                                     </div>
                                 </li>
                             </ul>
+
                         </div>
                     </div>
                 </div>
-
-                <div class="mx-3" id="myInput"></div>
-
-                <div class=" d-flex justify-content-center justify-content-md-center align-items-end ">
-                    <button type="button" class="search-button mx-1"
-                        @click="getApartmentsRefresh(beds, rooms, radius, bathrooms)">Search
-                    </button>
-                </div>
-
 
             </div>
 
-
-
-
-
             <!-- INPUT -->
             <div class="row mt-4 d-flex justify-content-center ">
-                
-                
-                <div class="col-6 col-md-12 d-flex justify-content-center">
-                    <div class=" w-100">
-                        <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
+
+
+                <div class="col-12 col-sm-6 col-lg-3 mt-2 d-flex justify-content-center">
+                    <div class=" w-100 text-center">
+                        <label for="radius" class="">Radius</label>
                         <span class="my-font-sm">({{ this.radius }}km)</span>
                         <div class="radius_container">
-                            <input type="range" v-model="radius" id="radius" name="radius" min="1" max="100" default="20" />
-    
+                            <input type="range" v-model="radius" id="radius" name="radius" min="1" max="100"
+                                default="20" />
+
                         </div>
                     </div>
                 </div>
 
-                <div class="col-6 col-md-12 d-flex justify-content-center">
-                    <div class="counter w-100">
+                <div class="col-12 col-sm-6 col-lg-3 mt-2 d-flex justify-content-center">
+                    <div class="counter w-100 text-center">
                         <div>
                             <label for="Beds" class=" d-block d-lg-inline-block ">Beds</label>
                         </div>
                         <div class="d-inline-block input-container">
                             <button type="button" @click="bedsDecrement"><span
                                     :class="beds == 1 ? 'my-counter-disabled' : ''">-</span></button>
-                            <input type="text" min="0" max="99" size="1" maxlength="2" v-model="beds" name="beds" id="beds">
+                            <input type="text" min="0" max="99" size="1" maxlength="2" v-model="beds" name="beds"
+                                id="beds">
                             <button type="button" @click="bedsIncrement"><span
                                     :class="beds == 99 ? 'my-counter-disabled' : ''">+</span></button>
                         </div>
@@ -269,8 +262,8 @@ export default {
                 </div>
 
 
-                <div class="col-6 col-md-12 d-flex justify-content-center">
-                    <div class="counter w-100">
+                <div class="col-12 col-sm-6 col-lg-3 mt-2 d-flex justify-content-center">
+                    <div class="counter w-100 text-center">
                         <div>
                             <label for="rooms" class=" d-block d-lg-inline-block ">Rooms</label>
                         </div>
@@ -286,26 +279,40 @@ export default {
                 </div>
 
 
-                <div class="col-6 col-md-12 d-flex justify-content-center">
-                    <div class="counter w-100">
+                <div class="col-12 col-sm-6 col-lg-3 mt-2">
+                    <div class="counter w-100 text-center">
                         <div>
                             <label for="bathrooms" class=" d-block d-lg-inline-block ">Bathrooms</label>
                         </div>
                         <div class="d-inline-block input-container">
                             <button type="button" @click="bathroomsDecrement"><span
                                     :class="bathrooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
-                            <input type="text" min="0" max="99" size="1" maxlength="2" v-model="bathrooms" name="bathrooms"
-                                id="bathrooms">
+                            <input type="text" min="0" max="99" size="1" maxlength="2" v-model="bathrooms"
+                                name="bathrooms" id="bathrooms">
                             <button type="button" @click="bathroomsIncrement"><span
                                     :class="bathrooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
                         </div>
                     </div>
                 </div>
 
+
+                <div class="col-12 my-4">
+                    <div class=" d-flex justify-content-center justify-content-md-center align-items-end ">
+                        <button type="button" class="search-button mx-1"
+                            @click="getApartmentsRefresh(beds, rooms, radius, bathrooms)">Search
+                        </button>
+                    </div>
+                </div>
+
+
             </div>
 
 
 
+        </div>
+
+        <div class="col-12 mt-4 search-container">
+            <p>You searched for apartments in: <span class=" fw-bold ">"{{ this.queryVanilla }}"</span></p>
         </div>
 
         <!-- CARD CICLATE  -->
