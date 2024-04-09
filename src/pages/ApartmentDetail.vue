@@ -274,14 +274,14 @@ export default {
                         </div>
                         <!-- EMAIL  -->
                         <div class="col-6 mb-3">
-                            <label for="name" class="form-label"><i>Email</i></label>
+                            <label for="name" class="form-label"><i>Email*</i></label>
                             <input type="email" v-model="email" class="form-control" placeholder="Email" name="email"
                                 id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
                             <p v-if="errors.email" class="text-danger">{{ errors.email }}</p>
                         </div>
                         <!-- MESSAGE  -->
                         <div class="col-12 mb-3">
-                            <label for="description" class="form-label"><i>Message</i></label>
+                            <label for="description" class="form-label"><i>Message*</i></label>
                             <textarea class="form-control" v-model="description" name="description" id="description"
                                 rows="3" placeholder="Type your message here" required></textarea>
                             <p v-if="errors.description" class="text-danger">{{ errors.description }}</p>
