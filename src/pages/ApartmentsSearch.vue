@@ -84,6 +84,11 @@ export default {
                 this.currentPage = response.data.results.current_page;
                 this.lastPage = response.data.results.last_page;
 
+                if (this.apartments.length == 0) {
+                    this.apartments = null;
+                    this.error = 'There are no apartments matching the entered parameters...'
+                }
+
             }).catch((error) => {
                 this.apartments = null;
                 this.error = 'There are no apartments matching the entered parameters.'

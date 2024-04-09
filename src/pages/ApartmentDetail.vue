@@ -45,7 +45,9 @@ export default {
                 }
 
             }).catch((error) => {
-                this.error = 'There are no apartments matching the entered parameters...'
+                this.$router.push({
+                    name: 'not-found',
+                })
             })
 
         },
@@ -131,7 +133,7 @@ export default {
 </script>
 <template>
     <AppHeader />
-    <div v-if="apartment === null || apartment.length == 0">
+    <div v-if="apartment === null || apartment.length == 0" class="vh-100">
         <div class="error">
             {{ error }}
         </div>
@@ -247,61 +249,62 @@ export default {
 
             </div>
         </div>
-    </div>
-
-
-
-    <!-- INVIA UN MESSAGGIO SECTION  -->
-    <div class="container">
-        <div class="popular-title text-center my-5">
-            Send a message for this apartment
-            <div class="popular-subtitle">
-                fill the form and you will be reached out by the apartment owner
-            </div>
-        </div>
-
-        <!-- FORM DEI MESSAGGI  -->
-        <form @submit.prevent="sendMessage" method="post">
-            <div class="row justify-content-center">
-                <div class="col-12 col-sm-10 col-lg-8">
-                    <div class="row">
-                        <!-- NOME -->
-                        <div class="col-6 mb-3">
-                            <label for="name" class="form-label"><i>Name</i></label>
-                            <input v-model="name" type="text" name="name" id="name" class="form-control"
-                                placeholder="Name" max="50">
-                            <p v-if="errors.name" class="text-danger">{{ errors.name }}</p>
-                        </div>
-                        <!-- EMAIL  -->
-                        <div class="col-6 mb-3">
-                            <label for="name" class="form-label"><i>Email*</i></label>
-                            <input type="email" v-model="email" class="form-control" placeholder="Email" name="email"
-                                id="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
-                            <p v-if="errors.email" class="text-danger">{{ errors.email }}</p>
-                        </div>
-                        <!-- MESSAGE  -->
-                        <div class="col-12 mb-3">
-                            <label for="description" class="form-label"><i>Message*</i></label>
-                            <textarea class="form-control" v-model="description" name="description" id="description"
-                                rows="3" placeholder="Type your message here" required></textarea>
-                            <p v-if="errors.description" class="text-danger">{{ errors.description }}</p>
-                        </div>
-                    </div>
-                    <!-- BUTTON  -->
-                    <div class="text-center mb-5">
-                        <button type="submit" class="search-button"> Submit</button>
-                    </div>
-                </div>
-            </div>
-
-            <div v-if="thankyouMessage" class="col-12 text-center mb-5 popular-title">
-                Thank you!
+        <!-- INVIA UN MESSAGGIO SECTION  -->
+        <div class="container">
+            <div class="popular-title text-center my-5">
+                Send a message for this apartment
                 <div class="popular-subtitle">
-                    Your message has been successfully submit, you will soon hear from the apartment owner.
+                    fill the form and you will be reached out by the apartment owner
                 </div>
             </div>
-        </form>
+
+            <!-- FORM DEI MESSAGGI  -->
+            <form @submit.prevent="sendMessage" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-sm-10 col-lg-8">
+                        <div class="row">
+                            <!-- NOME -->
+                            <div class="col-6 mb-3">
+                                <label for="name" class="form-label"><i>Name</i></label>
+                                <input v-model="name" type="text" name="name" id="name" class="form-control"
+                                    placeholder="Name" max="50">
+                                <p v-if="errors.name" class="text-danger">{{ errors.name }}</p>
+                            </div>
+                            <!-- EMAIL  -->
+                            <div class="col-6 mb-3">
+                                <label for="name" class="form-label"><i>Email*</i></label>
+                                <input type="email" v-model="email" class="form-control" placeholder="Email"
+                                    name="email" id="email" required
+                                    pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                                <p v-if="errors.email" class="text-danger">{{ errors.email }}</p>
+                            </div>
+                            <!-- MESSAGE  -->
+                            <div class="col-12 mb-3">
+                                <label for="description" class="form-label"><i>Message*</i></label>
+                                <textarea class="form-control" v-model="description" name="description" id="description"
+                                    rows="3" placeholder="Type your message here" required></textarea>
+                                <p v-if="errors.description" class="text-danger">{{ errors.description }}</p>
+                            </div>
+                        </div>
+                        <!-- BUTTON  -->
+                        <div class="text-center mb-5">
+                            <button type="submit" class="search-button"> Submit</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div v-if="thankyouMessage" class="col-12 text-center mb-5 popular-title">
+                    Thank you!
+                    <div class="popular-subtitle">
+                        Your message has been successfully submit, you will soon hear from the apartment owner.
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
+
+
+
 
     <AppFooter />
 </template>
