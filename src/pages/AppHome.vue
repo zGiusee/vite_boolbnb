@@ -103,9 +103,9 @@ export default {
 
                         <!-- Input di TomTom -->
                         <div id="myInput"></div>
-                    </div>
-                    <div class="col-12 d-flex d-flex justify-content-center mt-3">
-                        <button type="button" @click="valueAndSearch" class="search-button">Search</button>
+                        <div class=" mx-3 d-flex justify-content-center justify-content-md-center align-items-end ">
+                            <button type="button" @click="valueAndSearch" class="search-button">Search</button>
+                        </div>
                     </div>
 
                 </div>
@@ -119,7 +119,7 @@ export default {
                 </div>
             </div>
 
-            <div class="row mt-5">
+            <div class="row mt-3">
                 <ApartmentCard v-for="apartment in apartments" :apartment="apartment" />
             </div>
         </div>
@@ -150,4 +150,5 @@ export default {
     background-color: red;
     height: 100px;
 }
+
 </style>

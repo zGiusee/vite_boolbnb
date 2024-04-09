@@ -75,7 +75,7 @@ export default {
 </script>
 
 <template>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3 mb-5 p-3">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3 mb-5 p-3 mt-3">
 
         <div class="mc-card">
             <router-link @click="getView(apartment.id)"

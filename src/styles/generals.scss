@@ -95,31 +95,32 @@ a {
     }
 }
 
+
 .nav-button {
-    font-size: 12px;
+    font-size: 15px;
     color: white;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 5px 15px;
-    background-color: $my_blue;
+    background-color: $my_lightblue;
     transition: all 0.6s;
 
     &:hover {
-        background-color: $my_lightblue;
-        color: white;
+        background-color: white;
+        color: $my_lightblue;
 
         a {
             color: white;
         }
     }
-
 }
 
+
 .my-disabled {
-    background-color: $my_bluetwo;
+    background-color: rgb(45, 147, 211);
 
     &:hover {
-        background-color: $my_bluetwo;
+        background-color: rgb(45, 147, 211);
         color: white;
 
         a {
