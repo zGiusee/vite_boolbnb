@@ -239,57 +239,66 @@ export default {
 
 
             <!-- INPUT -->
-            <div class="col-6 col-md-12 mt-4 d-flex justify-content-center ">
-                <div class="mx-4">
-                    <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
-                    <span class="my-font-sm">({{ this.radius }}km)</span>
-                    <div class="radius_container">
-                        <input type="range" v-model="radius" id="radius" name="radius" min="1" max="100" default="20" />
+            <div class="row mt-4 d-flex justify-content-center ">
+                
+                
+                <div class="col-6 col-md-12 d-flex justify-content-center">
+                    <div class=" w-100">
+                        <label for="radius" class=" d-block d-lg-inline-block ">Radius</label>
+                        <span class="my-font-sm">({{ this.radius }}km)</span>
+                        <div class="radius_container">
+                            <input type="range" v-model="radius" id="radius" name="radius" min="1" max="100" default="20" />
+    
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col-6 col-md-12 d-flex justify-content-center">
+                    <div class="counter w-100">
+                        <div>
+                            <label for="Beds" class=" d-block d-lg-inline-block ">Beds</label>
+                        </div>
+                        <div class="d-inline-block input-container">
+                            <button type="button" @click="bedsDecrement"><span
+                                    :class="beds == 1 ? 'my-counter-disabled' : ''">-</span></button>
+                            <input type="text" min="0" max="99" size="1" maxlength="2" v-model="beds" name="beds" id="beds">
+                            <button type="button" @click="bedsIncrement"><span
+                                    :class="beds == 99 ? 'my-counter-disabled' : ''">+</span></button>
+                        </div>
                     </div>
                 </div>
 
 
-                <div class="counter">
-                    <div>
-                        <label for="Beds" class=" d-block d-lg-inline-block ">Beds</label>
-                    </div>
-                    <div class="d-inline-block input-container">
-                        <button type="button" @click="bedsDecrement"><span
-                                :class="beds == 1 ? 'my-counter-disabled' : ''">-</span></button>
-                        <input type="text" min="0" max="99" size="1" maxlength="2" v-model="beds" name="beds" id="beds">
-                        <button type="button" @click="bedsIncrement"><span
-                                :class="beds == 99 ? 'my-counter-disabled' : ''">+</span></button>
-                    </div>
-                </div>
-
-
-                <div class="counter mx-4">
-                    <div>
-                        <label for="rooms" class=" d-block d-lg-inline-block ">Rooms</label>
-                    </div>
-                    <div class="d-inline-block input-container">
-                        <button type="button" @click="roomsDecrement"><span
-                                :class="rooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
-                        <input type="text" min="0" max="99" size="1" maxlength="2" v-model="rooms" name="rooms"
-                            id="rooms">
-                        <button type="button" @click="roomsIncrement"><span
-                                :class="rooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
+                <div class="col-6 col-md-12 d-flex justify-content-center">
+                    <div class="counter w-100">
+                        <div>
+                            <label for="rooms" class=" d-block d-lg-inline-block ">Rooms</label>
+                        </div>
+                        <div class="d-inline-block input-container">
+                            <button type="button" @click="roomsDecrement"><span
+                                    :class="rooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
+                            <input type="text" min="0" max="99" size="1" maxlength="2" v-model="rooms" name="rooms"
+                                id="rooms">
+                            <button type="button" @click="roomsIncrement"><span
+                                    :class="rooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
+                        </div>
                     </div>
                 </div>
 
 
-                <div class="counter">
-                    <div>
-                        <label for="bathrooms" class=" d-block d-lg-inline-block ">Bathrooms</label>
-                    </div>
-                    <div class="d-inline-block input-container">
-                        <button type="button" @click="bathroomsDecrement"><span
-                                :class="bathrooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
-                        <input type="text" min="0" max="99" size="1" maxlength="2" v-model="bathrooms" name="bathrooms"
-                            id="bathrooms">
-                        <button type="button" @click="bathroomsIncrement"><span
-                                :class="bathrooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
+                <div class="col-6 col-md-12 d-flex justify-content-center">
+                    <div class="counter w-100">
+                        <div>
+                            <label for="bathrooms" class=" d-block d-lg-inline-block ">Bathrooms</label>
+                        </div>
+                        <div class="d-inline-block input-container">
+                            <button type="button" @click="bathroomsDecrement"><span
+                                    :class="bathrooms == 1 ? 'my-counter-disabled' : ''">-</span></button>
+                            <input type="text" min="0" max="99" size="1" maxlength="2" v-model="bathrooms" name="bathrooms"
+                                id="bathrooms">
+                            <button type="button" @click="bathroomsIncrement"><span
+                                    :class="bathrooms == 99 ? 'my-counter-disabled' : ''">+</span></button>
+                        </div>
                     </div>
                 </div>
 
